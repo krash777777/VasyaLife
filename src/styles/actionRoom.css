@@ -1,0 +1,105 @@
+.actionRoom-conteiner{
+    height: 42vw;
+    width: 100%;
+    margin-top: 4vw;
+}
+
+.actionRoomBoxes{
+    height: 40vw;
+    border: white solid 0.2vw;
+    border-radius: 0.2vw;
+    float: left;
+    margin: 1vw 0 0 0.5vw;
+}
+
+.actionRoom-inventory{
+    width: 30vw;
+    box-shadow:inset 0 2vw 5vw 0 #eeeeee;
+    background-color: white;
+}
+
+.ctrlPanel{
+    width: 8vw;
+    border: white solid 0.2vw;
+    border-radius: 0.2vw;
+    float: left;
+    margin: 3vw 0 0 0.5vw;
+}
+
+.actionRoom-equipment{
+    width: 21vw;
+    height: 25vw;
+    float: left;
+    margin: 4vw 0 0 5vw;
+    box-shadow:inset 0 2vw 5vw 0 #eeeeee;
+    border-radius: 0.2vw;
+    /*background-color: #EAECEF;*/
+    background-color: #faf0e6;
+    -webkit-box-shadow:inset 0 0 6vw 0 #BBB6B0;
+    box-shadow:inset 0 0 6vw 0 #BBB6B0;
+}
+
+.ingr{
+    height: 8vw;
+    width: 8vw;
+    margin: 1vw;
+    background-color: #D3DDD6;
+    border: white solid 0.2vw;
+    float: left;
+    border-radius: 0.2vw;
+}
+
+.button-assemble{
+    height: 3vw;
+    width: 12.8vw;
+    margin: 0 4vw;
+    border: white solid 0.1vw;
+    background-color: #A3554B;
+    border-radius: 1vw;
+    float: left;
+}
+
+.button-assemble:hover{
+    cursor: pointer;
+    background-color: #BBB2B0;
+}
+
+.button-assemble-img{
+    height: 2.5vw;
+    width: 2.5vw;
+    margin: 0.25vw 1vw;
+    float: left;
+}
+.button-assemble-name{
+    float: left;
+    color: white;
+    margin: 0.7vw 0.1vw;
+    font-size: 1vw;
+}
+
+.actionRoom-store{
+    width: 29.5vw;
+    box-shadow:inset 0 2vw 5vw 0 #eeeeee;
+    background-color: white;
+}
+
+.button-equipment{
+    height: 6vw;
+    width: 6vw;
+    /*margin: 35% 2%;*/
+    border-radius: 0.3vw;
+}
+
+.button-equipment:hover{
+    box-shadow:inset 0 2vw 5vw 0 #eeeeee;
+    /*background: radial-gradient(ellipse at center, rgba(238,238,238,1) 0%,rgba(238,238,238,0) 52%,rgba(238,238,238,0) 100%);*/
+    cursor: pointer;
+}
+
+.clothingStoreBox{
+    height: 40vw;
+    border: white solid 0.2vw;
+    border-radius: 0.2vw;
+    margin: 1vw 0 0 0.5vw;
+    float: left;
+}

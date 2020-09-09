@@ -1,0 +1,305 @@
+.optionsInfo{
+    /*background: linear-gradient(to bottom, rgba(254,252,234,1) 0%,rgba(254,252,234,0.9) 20%,rgba(254,252,234,1) 50%,rgba(254,252,234,0.9) 80%,rgba(254,252,234,0.6) 100%);*/
+    background-color: #FDEFA5;
+    border: 2px #F8FBBC solid;
+    height: 40vw;
+}
+
+.options{
+    height: 90%;
+    width: 30vw;
+    border-radius: 0.4vw;
+    padding: 1vw 0 0 1vw;
+    float: left;
+}
+
+.label{
+    font-size: 1.2vw;
+    color: #05316D;
+    font-weight: bold;
+    margin-bottom: 0.65vw;
+}
+
+.infoBox{
+    width: 95%;
+    height: auto;
+    border-radius: 0.3vw;
+    /*padding: 0.4vw;*/
+    border: 2px #FAE987 solid;
+    /*border: 2px #FDEFA5 solid;*/
+    background-color: #FAE987;
+}
+
+.infoBox:hover{
+    border: 2px #F8FBBC solid;
+    background-color: #F2F886;
+    cursor: pointer;
+}
+
+.info-visual{
+    float: left;
+    margin: 0.35vw 0.75vw;
+}
+
+.info-components{
+    float: left;
+    width: 35%;
+    height: 2vw;
+}
+
+.component{
+    height: 1.3vw;
+    width: 1.3vw;
+    background-color: #FDF3BD;
+    border: #A3912C solid 1px;
+    border-radius: 0.3vw;
+    margin: 0.4vw 0.2vw;
+    float: right;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+.component-value-minus{
+    color: red;
+}
+
+.component-value-plus{
+    color: green;
+}
+
+.component-value-norm{
+    color: black;
+}
+
+.infoImg{
+    height: 2vw;
+    width: 2vw;
+    /*padding-left: 0.5vw;*/
+}
+
+.infoValue{
+    color: #A65B00;
+    font-size: 0.75vw;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.infoValueComponents{
+    font-size: 0.5vw;
+    font-weight: bold;
+    color: #342753;
+    text-align: center;
+}
+
+.infoValueModifier{
+    color: black;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+.info-discription{
+    width: 43%;
+    float: left;
+    padding-left: 1.5vw;
+    padding-top: 0.25vw;
+    font-size: 0.55vw;
+}
+
+.info-discription-header{
+    font-size: 1.1vw;
+    font-weight: bold;
+    color: #38216F;
+
+}
+
+.modifiers{
+    height: 90%;
+    width: 45%;
+    border-radius: 0.4vw;
+    padding: 2% 0;
+    float: left;
+}
+
+
+.inventory{
+    height: 39vw;
+    width: 60vw;
+    border-radius: 0.4vw;
+    margin: 0vw 0 0 1vw;
+    position: relative;
+}
+
+.inventory-background{
+    background-color: white;
+}
+
+.tabs{
+    height: 1.7vw;
+    width: 100%;
+}
+
+.tabButton{
+    border-top-left-radius: 0.3vw;
+    border-top-right-radius: 0.6vw;
+    background-color: #F7F7F7;
+    float: left;
+    margin-right: 0.3vw;
+    border-top: #A8A9A8 solid 1px;
+    border-right: #A8A9A8 solid 1px;
+    width: 9vw;
+}
+
+.tabButton:hover{
+    -webkit-box-shadow:inset 0 0 2vw 0 #e0e1e0;
+    box-shadow:inset 0 0 2vw 0 #e0e1e0;
+    color:#351728;
+    cursor: pointer;
+}
+
+.tabButtonImg{
+    height: 1vw;
+    width: 1vw;
+    float: left;
+    margin: 0.3vw 0.4vw 0.3vw 0.4vw;
+}
+
+.tabButtonText{
+    display: block;
+    margin-right: 1vw;
+    padding-top: 0.3vw;
+    font-size: 1vw;
+    float: left;
+}
+
+.tabPanel{
+    height: 100%;
+    width: 100%;
+    border: solid #eeeeee 0.1vw;
+    border-radius: 0.4vw;
+    border-top-left-radius: 0;
+}
+
+.items{
+    z-index: 99;
+    background: linear-gradient(to bottom, rgba(249,246,227,1) 0%,rgba(253,251,244,1) 30%,rgba(255,255,255,0.95) 50%,rgba(253,251,244,1) 70%,rgba(249,246,227,1) 100%);
+}
+
+.clothing{
+    z-index: 98;
+    background: linear-gradient(to bottom, rgba(246,244,238,1) 0%,rgba(251,251,248,1) 30%,rgba(255,255,255,0.95) 50%,rgba(251,251,248,1) 70%,rgba(246,244,238,1) 100%);
+}
+
+.magic{
+    z-index: 97;
+    background: linear-gradient(to bottom, rgba(244,251,252,1) 0%,rgba(251,253,254,1) 30%,rgba(255,255,255,0.95) 50%,rgba(251,253,254,1) 70%,rgba(244,251,252,1) 100%);
+}
+
+.itemOnTheShop{
+    height: 5vw;
+    width: 13vw;
+    background-color: #e1e1e1;
+    margin: 0.3vw 0 0 0.3vw;
+    border-radius: 0.2vw;
+    border: white solid 1px;
+    font-size: 0.5vw;
+    float: left;
+}
+
+.itemInfoBox{
+    height: 4vw;
+    width: 4vw;
+    margin: 0.3vw;
+    float: left;
+    display: block;
+}
+
+.itemInfoBoxRightPanel{
+    width: 7.5vw;
+}
+
+.price{
+    width: 100%;
+    font-size: 0.75vw;
+    font-weight: bold;
+    text-align: right;
+    margin-top: 0.4vw;
+    height: 1vw;
+}
+
+.quantity{
+    width: 100%;
+    margin: 0.2vw 0 0.6vw 0;
+    font-size: 0.5vw;
+    text-align: right;
+    height: 1vw;
+}
+
+.buttonBuy{
+    width: 96%;
+    height: 1.1vw;
+    border-radius: 0.2vw;
+    background: linear-gradient(to bottom, rgba(255,236,10,1) 0%,rgba(252,213,0,1) 100%);
+    border: solid #A68900 1px;
+    text-align: center;
+    font-size: 0.8vw;
+    font-weight: bold;
+    color: #240670;
+}
+
+.buttonBuy:hover{
+    cursor: pointer;
+    background: linear-gradient(to bottom, rgba(252,213,0,1) 0%,rgba(255,236,10,1) 100%);
+}
+
+.storeOptionsWrapper{
+    position: absolute;
+    left: 0.5vw;
+    top: 2.8vw;
+    height: 3vw;
+    width: 20vw;
+}
+
+.storeOptions{
+    height: 2vw;
+    width: 8vw;
+    border-radius: 0.5vw;
+    /*background-color: #e1e1e1;*/
+}
+
+.optionImg{
+    height: 1.7vw;
+    width: 1.7vw;
+    margin: 0.2vw;
+    border-radius: 0.3vw;
+    float: left;
+}
+
+.optionValue{
+    display: block;
+    float: left;
+    margin: 0.5vw 0 0 0.3vw;
+    font-size: 0.8vw;
+    font-weight: bold;
+}
+
+.clothingInfoBox{
+    margin-left: 0.3vw;
+}
+
+.clothingInfoPanel{
+    width: 4vw;
+    height: 2vw;
+}
+
+.clothingOnTheShop{
+    height: 9vw;
+    width: 4.6vw;
+    background-color: beige;
+    margin: 0.3vw 0 0 0.3vw;
+    border-radius: 0.2vw;
+    border: white solid 2px;
+    font-size: 0.5vw;
+    float: left;
+}

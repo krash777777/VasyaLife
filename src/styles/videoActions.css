@@ -1,0 +1,111 @@
+.videoAction {
+    border-radius: 1vw;
+    height: 43vw;/*720}*/
+    width: 76.5vw; /*1280*/
+
+    /*width: 62vw; !* 1024px 16.516*!*/
+    /*height: 46vw; !* 768px 16.69*!*/
+
+    /*1280 x 720}*/
+}
+
+.actionControlPanel{
+    position: absolute;
+    margin: auto;
+    left: 1vw;
+    bottom: 1.5vw;
+    height: 3vw;
+    width: 100%;
+}
+
+.actionControlCommand{
+    height: 3.5vw;
+    min-width: 7vw;
+    margin: 0 0.2vw;
+    float: left;
+    border: solid 2px #97AFB7;
+    color: #97AFB7;
+    border-radius: 0.4vw;
+    background: linear-gradient(to bottom, rgba(75,102,110,1) 0%,rgba(75,102,110,0.8) 50%,rgba(75,102,110,1) 100%);
+}
+
+.actionControlCommand:hover{
+    cursor: pointer;
+    background: linear-gradient(to bottom, rgba(139,173,183,1) 0%,rgba(139,173,183,0.8) 50%,rgba(139,173,183,1) 100%);
+    border: solid 2px white;
+    color: white;
+}
+
+.actionIco{
+    height: 3vw;
+    width: 3vw;
+    margin: 0.25vw;
+    float: left;
+}
+
+.actionText{
+    font-size: 1vw;
+    display: block;
+    float: left;
+    padding: 1.2vw 0.6vw;
+}
+
+.optionsChangePanel{
+    position: absolute;
+    margin: auto;
+    left: 1vw;
+    top: 8vw;
+    width: 50%;
+    opacity: 0;
+}
+
+.optionsChange{
+    height: 1.9vw;
+    min-width: 4vw;
+}
+
+.icoOption{
+    height: 1.3vw;
+    width: 1.3vw;
+    margin: 0.2vw;
+    float: left;
+}
+
+.optionChangeSign{
+    font-weight: bold;
+    height: 1.5vw;
+    width: 1vw;
+}
+
+.optionText{
+    font-size: 1vw;
+    padding: 0.2vw;
+    display: block;
+    float: left;
+    font-weight: bold;
+    text-align: center;
+}
+
+.minus{
+    color: red;
+}
+
+.plus{
+    color: green;
+}
+
+@keyframes fadeOptions {
+    from {
+        opacity: 1;
+        transform: translate3d(0, 35%, 0);
+    }
+
+    to {
+        opacity: 0;
+        transform: none;
+    }
+}
+
+.fadeInDown {
+    animation: fadeOptions 4500ms ease-in-out;
+}

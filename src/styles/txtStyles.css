@@ -1,0 +1,15 @@
+@keyframes pulsingRed {
+    50% {
+        color: #FF2800;
+        text-shadow: 0 0 4px #A61A00;
+    }
+}
+
+.textDecoration-lowLevel{
+    color: white;
+    animation: pulsingRed 1.3s linear infinite;
+}
+
+.textDecoration-averageLevel{
+    color: #BFAF30;
+}

@@ -1,0 +1,170 @@
+.storeClothing{
+    /*background-color: #EAECEF;*/
+    /*-webkit-box-shadow:inset 0 0 5vw 0 #B0B2B3;*/
+
+    height: 41vw;
+    width: 20vw;
+    margin: 4vw 0 0 0.5vw;
+    float: left;
+    position: relative;
+}
+
+.clothingOnTheStorage{
+    box-shadow:inset 0 0 5vw 0 #B0B2B3;
+    border: white solid 0.2vw;
+    border-radius: 0.2vw;
+    height: 100%;
+    width: 100%;
+}
+
+.data{
+    position: absolute;
+    top: 0; bottom: 0; right: 0; left: 0;
+}
+
+.itemOfClothing{
+    float: left;
+    margin: 0.3vw 0 0 0.3vw;
+    border-radius: 0.4vw;
+    border: #A68900 solid 2px;
+    background: linear-gradient(to bottom, rgba(255,231,115,1) 0%,rgba(255,243,193,1) 50%,rgba(255,231,115,1) 100%);
+    position: relative;
+}
+
+.itemOfClothing:hover{
+    -webkit-box-shadow:inset 0 0 2.5vw 0 #FFDE40;
+    cursor: pointer;
+}
+
+.clothingOnTheBody{
+    height: 41vw;
+    border-radius: 1vw;
+    margin: 4vw 0 0 0.8vw;
+    float: left;
+}
+
+.styleOfClothingResult{
+    height: 41vw;
+    width: 20.5vw;
+    margin: 1.2vw 0 0 0.4vw;
+    float: left;
+    position: relative;
+}
+
+.closingSet{
+    background-color: #EAECEF;
+    -webkit-box-shadow:inset 0 0 5vw 0 #B0B2B3;
+    box-shadow:inset 0 0 5vw 0 #B0B2B3;
+    height: 100%;
+    width: 100%;
+    border: white solid 0.2vw;
+    border-radius: 0.2vw;
+}
+
+.slideButton{
+    position: absolute;
+    margin: auto;
+    top: 0; bottom: 0;
+    font-size: 1vw;
+    font-weight: bold;
+    display: block;
+    height: 1.3vw;
+    width: 1.2vw;
+    border-radius: 50%;
+    padding: 0.2vw;
+    text-align: center;
+    /*color: #BFB16A;*/
+    /*border: solid 0.1vw #BFB16A;*/
+    /*background-color: #FFEC8E;*/
+    background-color: #ff8d01;
+    color: white;
+}
+
+.slideButton:hover{
+    /*color: #A57B22;*/
+    /*border: solid 0.1vw #A57B22;*/
+    /*background-color: #fece68;*/
+    background-color: #FFA941;
+    color:#A65B00;
+    cursor: pointer;
+}
+
+.slideLeft{
+    left: 0.5vw;
+}
+
+.slideRight{
+    right: 0.5vw;
+}
+
+.bodyFigure{
+    height: 28vw;
+    width: 18vw;
+    position: relative;
+    text-align: center;
+}
+
+
+.infoClothingStyle{
+    height: 12vw;
+    width: 18.5vw;
+    background-color: #eeeeee;
+    border: white solid 0.2vw;
+    border-radius: 0.2vw;
+}
+
+.bodyFigureImg{
+    width: 14vw;
+    height: 28vw;
+}
+
+.cellForClothes{
+    background-color: #eeeeee;
+    border: solid 2px #B3B3B3;
+    width: 4.8vw;
+    border-radius: 0.5vw;
+    opacity: 0.75;
+    position: absolute;
+}
+
+.body{
+    height: 6.8vw;
+    top: 7vw;
+    left: 0.5vw;
+}
+
+.legs{
+    height: 6.8vw;
+    top: 18vw;
+    left: 5vw;
+}
+
+.chest{
+    height: 4.8vw;
+    top: 6vw;
+    left: 6vw;
+}
+
+.hips{
+    height: 4.8vw;
+    top: 12vw;
+    left: 6.1vw;
+}
+
+.infoConteiner{
+    margin: 0.4vw;
+}
+
+.styleInfoImg{
+    height: 1vw;
+    width: 1vw;
+    float: left;
+}
+
+.styleInfoText{
+    display: block;
+    float: left;
+    width: 90%;
+    margin-left: 0.4vw;
+    font-size: 0.8vw;
+}
