@@ -18,7 +18,8 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[]
     },
     dream:{
         id:'dream',
