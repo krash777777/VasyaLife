@@ -5,6 +5,9 @@ import shopsAndGoods from './db_shopsAndGoods.jsx';
 import instantActions from './db_instantActions.jsx';
 import Npc from './db_npc.jsx';
 
+//доступные условия перехода по локациям: одежда (определенный стиль), одежда статус (не голая или голая), время, маркер (статус квеста), вещь в инвентаре,
+
+
 const locations = {
     townMap:{
         id:'townMap',
@@ -19,7 +22,9 @@ const locations = {
         actionRoom:[],
         actions:[],
         instantAction:[],
-        conditions:[]
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+            ]
     },
     dream:{
         id:'dream',
@@ -29,7 +34,10 @@ const locations = {
         transitions:[],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     hall:{
         id:'hall',
@@ -45,7 +53,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     kitchen:{
         id:'kitchen',
@@ -60,7 +71,10 @@ const locations = {
             {name:'Холодильник', tpl:templates.movingItems, img:Images.ico.store, indentationTop:'22.5vw',indentationLeft:'1vw', interval:5}
         ],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     bedroom:{
         id:'bedroom',
@@ -78,6 +92,9 @@ const locations = {
         instantAction:[
             {act:instantActions.sleep,indentationTop:'28vw',indentationLeft:'21vw'},
             // {act:instantActions.test,indentationTop:'30vw',indentationLeft:'21vw'},
+        ],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
         ]
     },
     bathroom:{
@@ -103,7 +120,10 @@ const locations = {
                 ]
             },
         ],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     parentsRoom:{
         id:'parentsRoom',
@@ -115,7 +135,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
 
     shoppingCenter:{
@@ -132,7 +155,10 @@ const locations = {
             {name:'Бутик модной одежды', tpl:templates.storeClothing,img:Images.ico.skirt, indentationTop:'19vw',indentationLeft:'1vw', interval:20}
         ],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     foodCourt:{
         id:'foodCourt',
@@ -147,6 +173,9 @@ const locations = {
         instantAction:[
             // {act:instantActions.frenchFries,indentationTop:'18vw',indentationLeft:'1vw'},
             // {act:instantActions.coffee,indentationTop:'20vw',indentationLeft:'1vw'},
+        ],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
         ]
     },
     college:{
@@ -163,7 +192,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     principalOffice:{
         id:'principalOffice',
@@ -175,7 +207,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     library:{
         id:'library',
@@ -187,7 +222,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     medicalOffice:{
         id:'medicalOffice',
@@ -199,7 +237,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
     class:{
         id:'class',
@@ -211,7 +252,10 @@ const locations = {
         ],
         actionRoom:[],
         actions:[],
-        instantAction:[]
+        instantAction:[],
+        conditions:[
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+        ]
     },
 }
 

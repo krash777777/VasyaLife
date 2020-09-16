@@ -6,7 +6,7 @@ const clothingSets = {
         id:'wrongSet',
         clothingOnTheBody:{body:'',chest:'',legs:'', hips:''},//в этом сете не указываем - он выбирается по умолчанию, если нет соответствий
         setOptions:[
-            {img:Images.ico.orbRed, text:'Отсутствует сочетание одежды, я чувствую себя не комфортно ...'}
+            {img:Images.ico.orbRed, text:'Отсутствует сочетание одежды, я чувствую себя не комфортно ...  никуда не пойду в таком виде'}
         ],//описание сета / бафы / дебафы - на основании этого массива строится общие характеристики баффа/дебафа
         setImages:[Images.character.wrongSet], // картинки в гардеробе
         setImagesForInteraction:{

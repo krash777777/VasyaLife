@@ -38,6 +38,24 @@ function scene(options, gameStatus){
     return gameStatus;
 }
 
+function checkingConditions(comparisonType,comparisonValue,value) {
+    console.log(comparisonType);
+    console.log(comparisonValue);
+    console.log(value);
+
+    if (comparisonType == 'equal') {
+        if (comparisonValue == value) {
+            return 1
+        }
+    }
+    if (comparisonType == 'not equal') {
+        if (comparisonValue !== value) {
+            return 1
+        }
+    }
+    return -1;
+}
+
 function goToLocation(options, gameStatus){
 
     //изменение жизненной энергии примем как 1/5, то есть от 5 минут времени изменяется одна единица жизненной энергии
@@ -45,11 +63,36 @@ function goToLocation(options, gameStatus){
 
     gameStatus = changeOption('lifeEnergy', 'decrease', options.interval/5, 'notLimited', gameStatus);
 
-    gameStatus.General.location = locations[options.location];
+    //проверям выполнение условий перехода
+    //console.log(locations[options.location].conditions);
+    let checkSumOfConditions = 0; let comment = '';
+    let locConditions = locations[options.location].conditions;
+    for (let i=0; i<locConditions.length;i++) {
+        let comparisonType = locConditions[i].comparisonType;
+        let comparisonValue = locConditions[i].value;
 
-    gameStatus.General.npcInLocation = findeNpcInLocation(gameStatus);
+        if (locConditions[i].item == 'clothingSet'){
+            if (checkingConditions(comparisonType, comparisonValue, gameStatus.Player.clothingSet.id)==-1){
+                checkSumOfConditions++;
+                comment = comment+'Я не могу в такой одежде переходить в эту локацию.';
+            }
+        }
+    }
 
-    return gameStatus;
+    if (checkSumOfConditions>0){
+        alert('Условия для перехода не выполнены. ' + comment);
+    } else {
+        gameStatus.General.location = locations[options.location];
+
+        gameStatus.General.npcInLocation = findeNpcInLocation(gameStatus);
+
+        return gameStatus;
+    }
+    // gameStatus.General.location = locations[options.location];
+    //
+    // gameStatus.General.npcInLocation = findeNpcInLocation(gameStatus);
+    //
+    // return gameStatus;
 }
 
 function useItem(options, gameStatus){
