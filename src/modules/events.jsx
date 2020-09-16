@@ -1,5 +1,5 @@
 import {findeNpcInLocation, findeValueOnTheArray} from './service.jsx';
-import {changeOption, changeTime, addModifier, deleteModifier} from './options.jsx';
+import {changeOption, changeTime, addModifier, deleteModifier, parseTimeData} from './options.jsx';
 import playerOptions from '../db/db_playerOptions.jsx';
 import scenes from '../db/db_scenesGeneral.jsx';
 import templates from '../db/db_templates.jsx';
@@ -39,11 +39,12 @@ function scene(options, gameStatus){
 }
 
 function checkingConditions(comparisonType,comparisonValue,value) {
-    console.log(comparisonType);
-    console.log(comparisonValue);
-    console.log(value);
 
-    if (comparisonType == 'equal') {
+    // console.log(comparisonValue);
+    // console.log(comparisonType);
+    // console.log(value);
+
+     if (comparisonType == 'equal') {
         if (comparisonValue == value) {
             return 1
         }
@@ -53,15 +54,22 @@ function checkingConditions(comparisonType,comparisonValue,value) {
             return 1
         }
     }
+    if (comparisonType == 'more') {
+        if (comparisonValue > value) {
+            return 1
+        }
+    }
+    if (comparisonType == 'less') {
+        if (comparisonValue < value) {
+            return 1
+        }
+    }
     return -1;
 }
 
 function goToLocation(options, gameStatus){
 
-    //изменение жизненной энергии примем как 1/5, то есть от 5 минут времени изменяется одна единица жизненной энергии
-    gameStatus = changeTime(options.interval, gameStatus);
 
-    gameStatus = changeOption('lifeEnergy', 'decrease', options.interval/5, 'notLimited', gameStatus);
 
     //проверям выполнение условий перехода
     //console.log(locations[options.location].conditions);
@@ -74,14 +82,31 @@ function goToLocation(options, gameStatus){
         if (locConditions[i].item == 'clothingSet'){
             if (checkingConditions(comparisonType, comparisonValue, gameStatus.Player.clothingSet.id)==-1){
                 checkSumOfConditions++;
-                comment = comment+'Я не могу в такой одежде переходить в эту локацию.';
+                comment = comment+'\n Я не могу в таком виде попасть в эту локацию (нужно сменить стиль одежды).';
             }
         }
+        if (locConditions[i].item == 'timeHour'){
+            let currentTime = gameStatus.General.dateAndTime.time;
+            let Time = parseTimeData(currentTime);
+            //console.log(currentTime);
+            if (checkingConditions(comparisonType, comparisonValue, Time.hours)==-1){
+                checkSumOfConditions++;
+                comment = comment+'\n Нужно прийти в другое время.';
+            }
+        }
+
+
     }
 
     if (checkSumOfConditions>0){
-        alert('Условия для перехода не выполнены. ' + comment);
+        alert(comment);
+        return gameStatus;
     } else {
+        //изменение жизненной энергии примем как 1/5, то есть от 5 минут времени изменяется одна единица жизненной энергии
+        gameStatus = changeTime(options.interval, gameStatus);
+
+        gameStatus = changeOption('lifeEnergy', 'decrease', options.interval/5, 'notLimited', gameStatus);
+
         gameStatus.General.location = locations[options.location];
 
         gameStatus.General.npcInLocation = findeNpcInLocation(gameStatus);

@@ -5,7 +5,7 @@ import shopsAndGoods from './db_shopsAndGoods.jsx';
 import instantActions from './db_instantActions.jsx';
 import Npc from './db_npc.jsx';
 
-//доступные условия перехода по локациям: одежда (определенный стиль), одежда статус (не голая или голая), время, маркер (статус квеста), вещь в инвентаре,
+//доступные условия перехода по локациям: одежда (определенный стиль), одежда статус (не голая или голая), время, маркер (статус квеста), вещь в инвентаре, уровень здоровья
 
 
 const locations = {
@@ -137,7 +137,9 @@ const locations = {
         actions:[],
         instantAction:[],
         conditions:[
-            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'},
+            {item:'timeHour', comparisonType:'less',value:'6'},
+            {item:'timeHour', comparisonType:'more',value:'23'},
         ]
     },
 
