@@ -68,9 +68,6 @@ function checkingConditions(comparisonType,comparisonValue,value) {
 }
 
 function goToLocation(options, gameStatus){
-
-
-
     //проверям выполнение условий перехода
     //console.log(locations[options.location].conditions);
     let checkSumOfConditions = 0; let comment = '';
@@ -94,8 +91,14 @@ function goToLocation(options, gameStatus){
                 comment = comment+'\n Нужно прийти в другое время.';
             }
         }
+        if (locConditions[i].item == 'item'){
+            let itemInInventory = findeValueOnTheArray(comparisonValue, gameStatus.Player.playerStore.items, 'arrayItemId');
 
-
+            if (itemInInventory==-1){
+                    checkSumOfConditions++;
+                    comment = comment+'\n У меня нет подходящего предмета ('+comparisonValue+') для доступа в локацию';
+            }
+        }
     }
 
     if (checkSumOfConditions>0){
