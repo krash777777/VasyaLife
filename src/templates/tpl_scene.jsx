@@ -174,13 +174,28 @@ function NpcOptions(props) {
         return (
             <div className="scene-npcOptions-wrap">
                 <div className="scene-npcOption scene-npcOption-mood">
-                    <p className="scene-npcOption-header">Настроение</p>
-                    <p className="scene-npcOption-value">{props.npcRelations.relations}</p>
+                    <p className="npc-options-header">Отношения</p>
+                    <img src={Images.ico.relations} className="npc-options-ico"/>
+                    <div className="npc-options-value">{props.npcRelations.relations}</div>
                 </div>
+
                 <div className="scene-npcOption scene-npcOption-corruption">
-                    <p className="scene-npcOption-header">Похоть</p>
-                    <p className="scene-npcOption-value">{props.npcRelations.corruption}</p>
+                    <p className="npc-options-header">Разврат</p>
+                    <img src={Images.ico.corruption} className="npc-options-ico"/>
+                    <div className="npc-options-value">{props.npcRelations.corruption}</div>
                 </div>
+
+
+
+                {/*<div className="scene-npcOption scene-npcOption-mood">*/}
+                {/*    <img src={Images.ico.relations} className="img_background"/>*/}
+                {/*    <p className="scene-npcOption-header">Отношения</p>*/}
+                {/*    <p className="scene-npcOption-value">{props.npcRelations.relations}</p>*/}
+                {/*</div>*/}
+                {/*<div className="scene-npcOption scene-npcOption-corruption">*/}
+                {/*    <p className="scene-npcOption-header">Разврат</p>*/}
+                {/*    <p className="scene-npcOption-value">{props.npcRelations.corruption}</p>*/}
+                {/*</div>*/}
             </div>
         )
     }
@@ -478,6 +493,19 @@ class Scene extends React.Component {
                     <Options scene={arrInteraction} />
 
                     <NpcOptions scene={arrInteraction} npcRelations = {npcRelations} />
+
+                    {/*<div className="scene-npcOptions-wrap">*/}
+                    {/*    <div className="scene-npcOption scene-npcOption-mood">*/}
+
+                    {/*        <p className="npc-options-header">Отношения</p>*/}
+
+                    {/*        <img src={Images.ico.relations} className="npc-options-ico"/>*/}
+                    {/*        <div className="npc-options-value">10</div>*/}
+
+                    {/*    </div>*/}
+
+                    {/*</div>*/}
+
 
                     {/*<SceneTemplate data={scene} block={this.state.block} makeTransition={(transition, scene) => this.makeTransition(transition, scene)} />*/}
                 </div>
