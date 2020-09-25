@@ -494,17 +494,17 @@ class Scene extends React.Component {
 
                     <NpcOptions scene={arrInteraction} npcRelations = {npcRelations} />
 
-                    {/*<div className="scene-npcOptions-wrap">*/}
-                    {/*    <div className="scene-npcOption scene-npcOption-mood">*/}
+                    <div className="scene-npcOptions-wrap">
+                        <div className="scene-npcOption scene-npcOption-mood">
 
-                    {/*        <p className="npc-options-header">Отношения</p>*/}
+                            <p className="npc-options-header">Отношения</p>
 
-                    {/*        <img src={Images.ico.relations} className="npc-options-ico"/>*/}
-                    {/*        <div className="npc-options-value">10</div>*/}
+                            <img src={Images.ico.relations} className="npc-options-ico"/>
+                            <div className="npc-options-value">10</div>
 
-                    {/*    </div>*/}
+                        </div>
 
-                    {/*</div>*/}
+                    </div>
 
 
                     {/*<SceneTemplate data={scene} block={this.state.block} makeTransition={(transition, scene) => this.makeTransition(transition, scene)} />*/}
