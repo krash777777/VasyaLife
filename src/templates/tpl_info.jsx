@@ -37,14 +37,22 @@ class TabInformation extends React.Component {
         );
 
         const listNpc = data.Npc.map((stringNpc, index)=>
+
             <div key={index} className="npcWrapper">
-                <div className="npcIco">
-                    <img src={stringNpc.npc.ico}/>
-                </div>
-                <div className="npcInfo">
-                    <p className="npcName">{stringNpc.npc.name}</p>
-                    <p className="npcDiscription">{stringNpc.npc.discription}</p>
-                </div>
+
+                <p>
+                    <span className="npcName">{stringNpc.npc.name}</span>
+                    <span className="npcChar">Отношения: <span className="npcInfoDiscriptionValue">{stringNpc.relations}</span></span>
+                    <span className="npcChar">Похоть: <span className="npcInfoDiscriptionValue">{stringNpc.corruption}</span></span>
+                </p>
+
+                {/*<div className="npcIco">*/}
+                    {/*<img src={stringNpc.npc.ico}/>*/}
+                {/*</div>*/}
+                {/*<div className="npcInfo">*/}
+                    {/*<p className="npcName">{stringNpc.npc.name}</p>*/}
+                    {/*<p className="npcDiscription">{stringNpc.npc.discription}</p>*/}
+                {/*</div>*/}
             </div>
         );
 

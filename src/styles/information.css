@@ -106,9 +106,9 @@
 }
 
 .questWrapper:hover{
-    background-color: #EA9CB3;
+    /*background-color: #EA9CB3;*/
     cursor: pointer;
-    color: white;
+    color: black;
 }
 
 .questName{
@@ -129,7 +129,7 @@
 }
 
 .questDiscription{
-    font-size: 0.8vw;
+    font-size: 0.7vw;
     padding: 0.3vw 1vw 0.5vw 1vw;
 }
 
@@ -142,7 +142,8 @@
 
 .npcWrapper{
     width: 100%;
-    min-height: 6vw;
+    padding: 0.2vw;
+    /*min-height: 6vw;*/
 }
 
 .npcWrapper:hover{
@@ -165,14 +166,24 @@
 }
 
 .npcName{
-    padding: 0.5vw 0 0 1vw;
+    padding: 0.5vw 1vw 0vw 1vw;
     font-size: 1vw;
     font-weight: bold;
+    min-width: 4vw;
 }
 
 .npcDiscription{
-    padding: 0.5vw 0 0 1vw;
-    font-size: 0.8vw;
+    padding: 0.2vw 0 0 2vw;
+    font-size: 0.75vw;
+}
+
+.npcChar{
+    font-size: 0.75vw;
+    padding: 0 1vw 0 1vw;
+}
+
+.npcInfoDiscriptionValue{
+    font-weight: bold;
 }
 
 .panelVisible{
