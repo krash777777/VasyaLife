@@ -122,7 +122,8 @@ const locations = {
         ],
         instantAction:[],
         conditions:[
-            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}
+            {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'},
+            {item:'item', comparisonType:'equal',value:'dildoRealistic'}
         ]
     },
     parentsRoom:{
