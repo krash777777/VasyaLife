@@ -40,21 +40,28 @@
     width: 5vw;
     margin: 0.5vw;
     font-weight: bold;
-    text-align: center;
+    /*text-align: center;*/
+    /*float: left;*/
 }
 
 .scene-npcOption-mood{
     border-radius: 0.75vw;
-    background-color: palegreen;
-    border: 2px solid green;
-    color: darkgreen;
+    /*background-color: palegreen;*/
+    background-color: #fefcea;
+    border: 2px solid #BFBDB3;
+    /*color: #353973;*/
+    color: #A59C4C;
 }
 
 .scene-npcOption-corruption{
     border-radius: 0.75vw;
-    background-color: lightpink;
-    border: 2px solid hotpink;
-    color: deeppink;
+    /*background-color: lightpink;*/
+    /*border: 2px solid hotpink;*/
+    /*color: deeppink;*/
+
+    background-color: #FCE300;
+    border: 2px solid #BDAF2F;
+    color: #A49300;
 }
 
 .scene-npcOption-header{
@@ -124,4 +131,25 @@
     color:#651919;
     background-color: #9B4D4D;
     border-color: #744848;
+}
+
+.npc-options-header{
+    font-size: 0.75vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+.npc-options-ico{
+    height: 2vw;
+    width: 2vw;
+    padding: 0 0.4vw;
+    float: left;
+}
+
+.npc-options-value{
+    float: left;
+    height: 2vw;
+    font-size: 1.2vw;
+    color: #353973;
+    font-weight: bolder;
 }

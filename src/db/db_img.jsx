@@ -39,6 +39,8 @@ const Images = {
 
         money:'content/ico/money.png',
         heart:'content/ico/heart.png',
+        relations:'content/ico/relations.png',
+        corruption:'content/ico/corruption.png',
         yinYang:'content/ico/yinYang.png',
         energyYellow:'content/ico/energyYellow.png',
         gender:'content/ico/gender.png',
