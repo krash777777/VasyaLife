@@ -130,6 +130,8 @@ class Information extends React.Component {
                                         <img className="tablet-decor-block" src={Images.ico.tabInternetAccess}/>
                                     </div>
 
+                                    <div>1</div>
+
                                     {/*<div className="tablet-control-panel">*/}
                                         {/*<div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('npc')}><img src={Images.ico.npc2}/></div>*/}
                                         {/*<div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('quests')}><img src={Images.ico.tasks}/></div>*/}
