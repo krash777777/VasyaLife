@@ -23,6 +23,7 @@ class TabInformation extends React.Component {
         const questVision = this.state.tabFocus=='quests'?'panelVisible':'panelInvisible';
         const npcVision = this.state.tabFocus=='npc'?'panelVisible':'panelInvisible';
         const infoVision = this.state.tabFocus=='info'?'panelVisible':'panelInvisible';
+        const recipesVision = this.state.tabFocus=='recipes'?'panelVisible':'panelInvisible';
 
         const listQuests = data.GameMarks.quests.map((quest,index) =>
             <div key={index} className="questWrapper">
@@ -56,6 +57,13 @@ class TabInformation extends React.Component {
             </div>
         );
 
+        // const lisRecipes = data.Npc.map((stringNpc, index)=>
+        //
+        //     <div key={index} className="npcWrapper">
+        //
+        //     </div>
+        // );
+
         return (
             <div>
                 <div className="infoBackground"></div>
@@ -74,9 +82,41 @@ class TabInformation extends React.Component {
                     <p className={infoVision+' tabHeader'}>Информация</p>
                 </div>
 
+                <div className={recipesVision+' info'}>
+                    <p className={recipesVision+' tabHeader'}>Рецепты</p>
+
+                    <div className="recipeItem">
+                        <img src={Images.items.food.cake}/>
+                        <span className="recipeNumberOfItems">{10}</span>
+                    </div>
+
+                    <div className="recipeItemShell">
+                        <p>Эффекты</p>
+                        <div className="component">
+                            <div className="componen-img"><img src={Images.items.food.apple}/></div>
+                            <div className={'increase' =='increase'?'component-value-plus':'component-value-minus'}>{'increase' == 'increase'?'+':'-'}{1}</div>
+                        </div>
+                    </div>
+
+                    <div className="recipeItemShell">
+                        <p>Ингридиенты</p>
+                        <div className="ingrItem">
+                            <img src={Images.items.food.egg}/>
+                            <span className="recipeNumberOfItems">{2}</span>
+                        </div>
+                        <div className="ingrItem">
+                            <img src={Images.items.food.egg}/>
+                            <span className="recipeNumberOfItems">{3}</span>
+                        </div>
+                    </div>
+
+
+                </div>
+
                 <div className="tablet-control-panel">
                     <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('quests')}><img src={Images.ico.tasks}/></div>
                     <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('npc')}><img src={Images.ico.npc2}/></div>
+                    <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('recipes')}><img src={Images.ico.orbGreen}/></div>
                     <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('info')}><img src={Images.ico.info}/></div>
                 </div>
             </div>
