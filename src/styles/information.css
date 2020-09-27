@@ -141,8 +141,8 @@
 }
 
 .npcWrapper{
-    width: 100%;
-    padding: 0.2vw;
+    width: 99.4%;
+    padding: 0.2%;
     /*min-height: 6vw;*/
 }
 
@@ -166,10 +166,12 @@
 }
 
 .npcName{
-    padding: 0.5vw 1vw 0vw 1vw;
+    padding: 0.2vw 1vw;
     font-size: 1vw;
     font-weight: bold;
-    min-width: 4vw;
+    display: block;
+    width: 17vw;
+    color: #9B4D4D;
 }
 
 .npcDiscription{
@@ -180,6 +182,7 @@
 .npcChar{
     font-size: 0.75vw;
     padding: 0 1vw 0 1vw;
+    color: #9B4D4D;
 }
 
 .npcInfoDiscriptionValue{
