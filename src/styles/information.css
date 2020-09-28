@@ -223,7 +223,7 @@
     float: left;
     height: 2vw;
     width: 2vw;
-    margin: 0vw 0 0 0.3vw;
+    margin: 0vw 0.2vw 0 0.2vw;
     padding: 0.2vw;
     border-radius: 0.3vw;
     border: 1px white solid;
@@ -240,7 +240,7 @@
     border-radius: 0.3vw;
     border-top: 1px white solid;
     height: 3vw;
-    width: 20vw;
+    /*width: 28%;*/
     float: left;
     margin: 0.2vw 0 0 0.3vw;
     padding: 0.2vw;
@@ -248,6 +248,81 @@
     color: #89000c;
     font-weight: bold;
     background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%);
+}
+
+.recipeItemDiscription{
+    color: #671A21;
+    padding: 0 0 0 0.5vw;
+}
+
+.effects-width{
+    width: 20%;
+}
+
+.recipeItemDiscription-width{
+    width: 45%;
+}
+
+.npcIco{
+    float: left;
+    height: 3vw;
+    width: 3vw;
+    margin: 0.2vw 0 0 0.3vw;
+    padding: 0.2vw;
+    border-radius: 0.3vw;
+    border: 1px white solid;
+    position: relative;
+    background: linear-gradient(to bottom, rgba(245,249,240,1) 0%,rgba(249,252,247,0.8) 100%);
+}
+
+.npcInfoRow{
+    width: 90%;
+    height: 4vw;
+}
+
+.npcInfoShell{
+    border-radius: 0.3vw;
+    border-top: 1px white solid;
+    height: 3vw;
+    float: left;
+    margin: 0.2vw 0 0 0.3vw;
+    padding: 0.2vw;
+    font-size: 1vw;
+    color: #89000c;
+    font-weight: bold;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%);
+}
+
+.npcDiscription{
+    width: 30%;
+}
+
+.npcOptionsShell{
+    width: 40%;
+}
+
+.npcDiscriptionComment{
+    font-size: 0.6vw;
+    color: #671A21;
+}
+
+.npcOption{
+    height: 3vw;
+    width: 5vw;
+    margin: 0.1vw;
+    font-weight: bold;
+    border-radius: 0.3vw;
+    color: #A59C4C;
+    float: left;
+    background: linear-gradient(to bottom, #f1da36 0%,#fefcea 100%);
+    border: 1px white solid;
+    position: relative;
+
+    /*color: #89000c;*/
+}
+
+.npc-option-name{
+    color: #671A21;
 }
 
 .panelVisible{

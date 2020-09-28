@@ -76,21 +76,47 @@ class TabInformation extends React.Component {
                 <div className={npcVision+' info'}>
                     <p className={npcVision+' tabHeader'}>Персонажи</p>
                     {listNpc}
-                </div>
 
-                <div className={infoVision+' info'}>
-                    <p className={infoVision+' tabHeader'}>Информация</p>
+                    <div className="npcInfoRow">
+                        <div className="npcIco">
+                            <img src={Images.npc.mom.ico_mom_present}/>
+                        </div>
+
+                        <div className="npcInfoShell npcDiscription">
+                            <p>Мама</p>
+                            <p className="npcDiscriptionComment">Описание или комментарий, если нужно ... </p>
+                        </div>
+
+                        <div className="npcInfoShell npcOptionsShell">
+                            <div className="npcOption">
+                                <p className="npc-options-header npc-option-name">Отношения</p>
+                                <img src={Images.ico.relations} className="npc-options-ico"/>
+                                <div className="npc-options-value">{1}</div>
+                            </div>
+                            <div className="npcOption">
+                                <p className="npc-options-header">Отношения</p>
+                                <img src={Images.ico.relations} className="npc-options-ico"/>
+                                <div className="npc-options-value">{1}</div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <div className={recipesVision+' info'}>
-                    <p className={recipesVision+' tabHeader'}>Рецепты</p>
+                    <p className={recipesVision+' tabHeader'}>Доступные рецепты</p>
 
                     <div className="recipeItem">
                         <img src={Images.items.food.cake}/>
                         <span className="recipeNumberOfItems">{10}</span>
                     </div>
 
-                    <div className="recipeItemShell">
+                    <div className="recipeItemShell recipeItemDiscription-width">
+                        <p>Наименование комплекта</p>
+                        <p className="recipeItemDiscription">Тут есть какое то афигенно большое описание комплекта и его свойств. Бла бла бла ...</p>
+                    </div>
+
+                    <div className="recipeItemShell effects-width">
                         <p>Эффекты</p>
                         <div className="component">
                             <div className="componen-img"><img src={Images.items.food.apple}/></div>
@@ -108,9 +134,19 @@ class TabInformation extends React.Component {
                             <img src={Images.items.food.egg}/>
                             <span className="recipeNumberOfItems">{3}</span>
                         </div>
+                        <div className="ingrItem">
+                            <img src={Images.items.food.egg}/>
+                            <span className="recipeNumberOfItems">{2}</span>
+                        </div>
+                        <div className="ingrItem">
+                            <img src={Images.items.food.egg}/>
+                            <span className="recipeNumberOfItems">{1}</span>
+                        </div>
                     </div>
+                </div>
 
-
+                <div className={infoVision+' info'}>
+                    <p className={infoVision+' tabHeader'}>Информация</p>
                 </div>
 
                 <div className="tablet-control-panel">
