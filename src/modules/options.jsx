@@ -69,6 +69,8 @@ function parseTimeData(time){
 function changeOption(optionId, type, value, limit, gameStatus) {
 
     //alert(optionId+' - '+type+' - '+value+' - '+limit);
+    //console.log('otion:'+optionId+', type:'+type+', value:'+value+', limit:'+limit);
+
 
     //описание передаваемых данных
     //optionId - опция, которую мы собираемся изменять
@@ -106,12 +108,24 @@ function changeOption(optionId, type, value, limit, gameStatus) {
         balance = value>=maxAvailableValue?maxAvailableValue:value<=minValue?minValue:value;
     }
 
-
     gameStatus.Player.options[optionIndex].value = balance;
-
 
     changeCharacteristics(optionId, optionIndex, gameStatus);
 
+    //3. Запускаем мгновенное событие, в зависимости от параметров
+    //вычисляем значение характеристики (с учетом можификаторов)
+    let charIndex = findeValueOnTheArray(playerOptions[optionId].id, gameStatus.Player.characteristics, 'arrayOptionId');
+    let charCurrentValue = gameStatus.Player.characteristics[charIndex].totalValue;
+
+    if (type == 'decrease'){
+        if (optionId=='lifeEnergy'){
+            if (charCurrentValue<50){
+                alert('Смерть сообщает, что надо что то делать, если не хочешь глупо закончить игру');
+            }
+        }
+    }
+
+    //console.log('optionId:'+optionId+', optionIndex:'+optionIndex+', type:'+type+', currentValue:'+currentValue+', value after changes:'+balance);
 
     return gameStatus;
 }

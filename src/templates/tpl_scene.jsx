@@ -184,18 +184,6 @@ function NpcOptions(props) {
                     <img src={Images.ico.corruption} className="npc-options-ico"/>
                     <div className="npc-options-value">{props.npcRelations.corruption}</div>
                 </div>
-
-
-
-                {/*<div className="scene-npcOption scene-npcOption-mood">*/}
-                {/*    <img src={Images.ico.relations} className="img_background"/>*/}
-                {/*    <p className="scene-npcOption-header">Отношения</p>*/}
-                {/*    <p className="scene-npcOption-value">{props.npcRelations.relations}</p>*/}
-                {/*</div>*/}
-                {/*<div className="scene-npcOption scene-npcOption-corruption">*/}
-                {/*    <p className="scene-npcOption-header">Разврат</p>*/}
-                {/*    <p className="scene-npcOption-value">{props.npcRelations.corruption}</p>*/}
-                {/*</div>*/}
             </div>
         )
     }

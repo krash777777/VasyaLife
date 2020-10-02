@@ -40,6 +40,7 @@ const defaultValues = {
                 {option:playerOptions.mana, optionValue:0, modifierValue:0, clothingValue:0, totalValue:0, style:'', animation:''},
                 {option:playerOptions.money, optionValue:0, modifierValue:0, clothingValue:0, totalValue:0, style:'', animation:''},
             ],
+            //опция (или по другому "параметр") - это "чистое" значение ГГ, без модификаторов
             options:[
                 {option:playerOptions.lifeEnergy,value:75},
                 {option:playerOptions.morale,value:0},

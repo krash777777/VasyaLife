@@ -44,7 +44,7 @@ function checkingConditions(comparisonType,comparisonValue,value) {
     // console.log(comparisonType);
     // console.log(value);
 
-     if (comparisonType == 'equal') {
+    if (comparisonType == 'equal') {
         if (comparisonValue == value) {
             return 1
         }
@@ -68,8 +68,7 @@ function checkingConditions(comparisonType,comparisonValue,value) {
 }
 
 function goToLocation(options, gameStatus){
-    //проверям выполнение условий перехода
-    //console.log(locations[options.location].conditions);
+
     let checkSumOfConditions = 0; let comment = '';
     let locConditions = locations[options.location].conditions;
     for (let i=0; i<locConditions.length;i++) {
@@ -209,7 +208,6 @@ function purchaseGoods(options, gameStatus) {
     } else {
         alert('Не достоаточно денег для совершения операции!');
     }
-
 
     return gameStatus;
 }
