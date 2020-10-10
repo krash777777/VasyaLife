@@ -87,6 +87,9 @@ function changeOption(optionId, type, value, limit, gameStatus) {
     let normaValue = playerOptions[optionId].norm;
     let maxValue = playerOptions[optionId].maxValue;
 
+    let charIndex = findeValueOnTheArray(playerOptions[optionId].id, gameStatus.Player.characteristics, 'arrayOptionId');
+    let charValueBeforeChange = gameStatus.Player.characteristics[charIndex].totalValue;
+
     //==============================================================
     //Программируем действия до нормы
 
@@ -114,19 +117,26 @@ function changeOption(optionId, type, value, limit, gameStatus) {
 
     //3. Запускаем мгновенное событие, в зависимости от параметров
     //вычисляем значение характеристики (с учетом можификаторов)
-    let charIndex = findeValueOnTheArray(playerOptions[optionId].id, gameStatus.Player.characteristics, 'arrayOptionId');
-    let charCurrentValue = gameStatus.Player.characteristics[charIndex].totalValue;
 
+    let charValueAfterChange = gameStatus.Player.characteristics[charIndex].totalValue;
+
+    //console.log(optionId+' before:'+charValueBeforeChange+'; after:'+charValueAfterChange)
+    //console.log('optionId:'+optionId+', optionIndex:'+optionIndex+', type:'+type+', currentValue:'+currentValue+', value after changes:'+balance);
+
+    //3.1 Сообщаем игроку, что он находится в опасной близости к завершению игры ... ему нужно что то делать
     if (type == 'decrease'){
         if (optionId=='lifeEnergy'){
-            if (charCurrentValue<50){
-                alert('Смерть сообщает, что надо что то делать, если не хочешь глупо закончить игру');
+            if ((charValueBeforeChange>=50) && (charValueAfterChange<50)){
+                alert('Игра сообщает, что надо что то делать, если не хочешь загнуться от истощения жизненных сил');
+
+                doInstantActions(scenes.sleep, gameStatus);
+                //this.props.changeStates('launchInstantAction', {act:'sleep'});
             }
         }
     }
 
-    //
-    //console.log('optionId:'+optionId+', optionIndex:'+optionIndex+', type:'+type+', currentValue:'+currentValue+', value after changes:'+balance);
+
+
 
     return gameStatus;
 }
@@ -210,8 +220,10 @@ function changeCharacteristics(optionId, optionIndex, gameStatus) {
         if (totalValueCharacteristics <= 0){
 
             //смерть - запускаем сцену завершения игры
-            gameStatus.General.tpl = templates.scene;
-            gameStatus.General.action = scenes.death;
+            //gameStatus.General.tpl = templates.scene;
+            //gameStatus.General.action = scenes.death;
+
+            doInstantActions(scenes.death, gameStatus);
         }
     } if (optionId == 'sexEnergy'){
 
@@ -224,6 +236,14 @@ function changeCharacteristics(optionId, optionIndex, gameStatus) {
     //==============================================================
     //Программируем воздействие надетых вещей
 
+
+    return gameStatus;
+}
+
+function doInstantActions(scene, gameStatus) {
+
+    gameStatus.General.tpl = templates.scene;
+    gameStatus.General.action = scene;
 
     return gameStatus;
 }
