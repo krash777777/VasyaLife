@@ -125,6 +125,7 @@ function changeOption(optionId, type, value, limit, gameStatus) {
         }
     }
 
+    //
     //console.log('optionId:'+optionId+', optionIndex:'+optionIndex+', type:'+type+', currentValue:'+currentValue+', value after changes:'+balance);
 
     return gameStatus;
