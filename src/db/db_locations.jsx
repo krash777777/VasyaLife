@@ -7,6 +7,7 @@ import Npc from './db_npc.jsx';
 
 //доступные условия перехода по локациям: одежда (определенный стиль), одежда статус (не голая или голая), время, маркер (статус квеста), вещь в инвентаре, уровень здоровья
 
+//conditions - условия перехода из локации в локацию ...
 
 const locations = {
     townMap:{
@@ -51,7 +52,9 @@ const locations = {
             {name:'Ванная комната',location:'bathroom', img:Images.ico.chevronDown,indentationTop:'25vw',indentationLeft:'1vw', transitionTime:5},
             {name:'В город',location:'townMap',img:Images.ico.map,indentationTop:'43vw',indentationLeft:'30vw', transitionTime:10}
         ],
-        actionRoom:[],
+        actionRoom:[
+            {name:'Тумбочка', tpl:templates.movingItems, img:Images.ico.store, indentationTop:'26vw',indentationLeft:'35vw', interval:5}
+        ],
         actions:[],
         instantAction:[],
         conditions:[
@@ -91,7 +94,6 @@ const locations = {
         actions:[],
         instantAction:[
             {act:instantActions.sleep,indentationTop:'28vw',indentationLeft:'21vw'},
-            // {act:instantActions.test,indentationTop:'30vw',indentationLeft:'21vw'},
         ],
         conditions:[
             {item:'clothingSet', comparisonType:'not equal',value:'wrongSet'}

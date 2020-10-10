@@ -73,6 +73,9 @@ const defaultValues = {
                     {item:items.food.cake, quantity:4},
                     {item:items.food.flour, quantity:20},
                 ],
+                hall:[
+
+                ],
                 kitchenCraft:{
                     slot1:[], slot2:[], slot3:[], slot4:[],
                 },

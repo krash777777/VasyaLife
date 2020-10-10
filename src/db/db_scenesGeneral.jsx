@@ -9,14 +9,21 @@ import librarian from './scenes/db_scenes_librarian.jsx';
 import nurse from './scenes/db_scenes_nurse.jsx';
 import {sleep, doNotWontSleep} from './scenes/db_scenes_sleep.jsx';
 import test from './scenes/db_scenes_test.jsx';
+import {warning_lifeEnergyUnder50, warning_lifeEnergyUnder10} from './scenes/db_scenes_warning.jsx';
 
 //const ScenesGeneral = Scenes01;
 const ScenesGeneral = {
     test:test,
     intro:Scenes01,
+
+    //instant actions (мгновенные действия)
     sleep:sleep,
     doNotWontSleep:doNotWontSleep,
     death:death,
+    warning_lifeEnergyUnder50:warning_lifeEnergyUnder50,
+    warning_lifeEnergyUnder10:warning_lifeEnergyUnder10,
+
+    //NPC
     mom:mom,
     mom_blackDress:mom_blackDress,
     mom_whitePanties:mom_whitePanties,

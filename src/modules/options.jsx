@@ -4,6 +4,7 @@ import scenes from '../db/db_scenesGeneral.jsx';
 import templates from '../db/db_templates.jsx';
 import locations from '../db/db_locations.jsx';
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './events.jsx';
+import items from '../db/db_items.jsx';
 
 
 function changeTimeData(CurrentTimeAndDate, Interval){
@@ -25,6 +26,8 @@ function changeTime(interval, gameStatus) {
     let daysCounter = currentTime.daysCounter+dayCounterModifier;
     let dayOfTheWeek = currentTime.dayOfTheWeek == 6 ? 0 : currentTime.dayOfTheWeek+dayCounterModifier;
 
+    let hoursBeforeChange = Math.floor(currentTime.time/60);
+    //console.log('hoursBeforeChange:'+hoursBeforeChange+' after:'+hours);
 
     let prefixH = hours<10 ? '0' : '';
     let prefixM = minutes<10 ? '0' : '';
@@ -34,6 +37,11 @@ function changeTime(interval, gameStatus) {
     gameStatus.General.dateAndTime.time = time;
     gameStatus.General.dateAndTime.daysCounter = daysCounter;
     gameStatus.General.dateAndTime.dayOfTheWeek = dayOfTheWeek;
+
+    //запустим события, при смене суток ( во время перехода от 23 часов к 0)
+    if (hoursBeforeChange==23 && hours==0){
+        changesInTheGameWorldWhenTheDayChanges(gameStatus);
+    }
 
     //изменим действие модификаторов
     let playerModifiers = gameStatus.Player.modifiers;
@@ -64,6 +72,23 @@ function parseTimeData(time){
 
     const Time = {hours: hours, prefixH:prefixH, minutes: minutes, prefixM:prefixM}
     return Time;
+}
+
+function changesInTheGameWorldWhenTheDayChanges(gameStatus) {
+
+    //пока не придумал, как реально буду применять эту процедуру
+
+    //alert('change of day');
+
+    //предметы в локациях при смене суток
+
+    //добавим яблоко в тумбочку в холле ... для примера
+    let storeReceiver = gameStatus.WorldSettings.worldItemStorage.hall;
+    gameStatus = receiveItem(items.food.apple, storeReceiver, 1, gameStatus);
+
+    //NPC - настроение (восстановление до нормы)
+
+    return gameStatus;
 }
 
 function changeOption(optionId, type, value, limit, gameStatus) {
@@ -119,23 +144,18 @@ function changeOption(optionId, type, value, limit, gameStatus) {
     //вычисляем значение характеристики (с учетом можификаторов)
 
     let charValueAfterChange = gameStatus.Player.characteristics[charIndex].totalValue;
-
-    //console.log(optionId+' before:'+charValueBeforeChange+'; after:'+charValueAfterChange)
-    //console.log('optionId:'+optionId+', optionIndex:'+optionIndex+', type:'+type+', currentValue:'+currentValue+', value after changes:'+balance);
-
+    
     //3.1 Сообщаем игроку, что он находится в опасной близости к завершению игры ... ему нужно что то делать
     if (type == 'decrease'){
         if (optionId=='lifeEnergy'){
             if ((charValueBeforeChange>=50) && (charValueAfterChange<50)){
-                alert('Игра сообщает, что надо что то делать, если не хочешь загнуться от истощения жизненных сил');
-
-                doInstantActions(scenes.sleep, gameStatus);
-                //this.props.changeStates('launchInstantAction', {act:'sleep'});
+                doInstantActions(scenes.warning_lifeEnergyUnder50, gameStatus);
+            }
+            if ((charValueBeforeChange>=10) && (charValueAfterChange<10)){
+                doInstantActions(scenes.warning_lifeEnergyUnder10, gameStatus);
             }
         }
     }
-
-
 
 
     return gameStatus;
@@ -218,11 +238,7 @@ function changeCharacteristics(optionId, optionIndex, gameStatus) {
 
     }if (optionId == 'lifeEnergy'){
         if (totalValueCharacteristics <= 0){
-
-            //смерть - запускаем сцену завершения игры
-            //gameStatus.General.tpl = templates.scene;
-            //gameStatus.General.action = scenes.death;
-
+            //жизненные силы закончились ... запускаем сцену завершения игры
             doInstantActions(scenes.death, gameStatus);
         }
     } if (optionId == 'sexEnergy'){
