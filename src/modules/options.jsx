@@ -157,6 +157,7 @@ function changeOption(optionId, type, value, limit, gameStatus) {
         }
     }
 
+    //test
 
     return gameStatus;
 }
