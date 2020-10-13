@@ -5,7 +5,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import {changeGameStates_fromScene} from './modules/options.jsx';
 
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './modules/events.jsx';
-import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions} from './modules/service.jsx';
+import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions, craft} from './modules/service.jsx';
 import {sleep, doInstanAction} from './modules/eventsInstanActions.jsx';
 
 //styles
@@ -291,28 +291,7 @@ class Game extends React.Component {
                 }
             }
         }if (command == 'craft'){
-            const playerStorage = gameStatus.Player.playerStore.items;
-            const worldItemSorage = gameStatus.WorldSettings.worldItemStorage[options.locationCraft];
-
-            let recepie = findeRecepie(gameStatus,options.locationCraft);
-
-            if (recepie!==-1){
-
-                //очистим все ячейки
-                for (var i = 1; i < 5; i++) {
-                    var slot = worldItemSorage['slot' + i];
-                    slot.splice(0,1);
-                }
-
-                //добавим в инвентарь результат готовки
-                let receiverIndex = findeValueOnTheArray(recepie.item.id,playerStorage, 'arrayItemId');
-                if (receiverIndex !== -1){
-                    playerStorage[receiverIndex].quantity = playerStorage[receiverIndex].quantity+recepie.quantity;
-                } else {
-                    playerStorage[playerStorage.length] = {item:recepie.item,quantity:recepie.quantity};
-                }
-            }
-
+            gameStatus = craft(options, gameStatus);
             //console.log(recepie);
 
         }if (command == 'purchaseGoods'){

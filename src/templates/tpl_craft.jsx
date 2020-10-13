@@ -7,6 +7,15 @@ import templates from '../db/db_templates.jsx';
 class Craft extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {focus:'items', showItemInfo:false, focusItem:''};
+    }
+
+    changeTabFocus(newFocus){
+        this.setState({focus:newFocus});
+    }
+
+    showRecipes(){
+        alert('Показываем доступные рецепты');
     }
 
     craft(locationCraft){
@@ -105,6 +114,13 @@ class Craft extends React.Component {
                                     {/*</div>*/}
 
                                     <div className="actionRoom-equipment">
+
+
+                                        <div className="button-assemble" onClick={() => this.showRecipes()}>
+                                            <div className="button-assemble-img"><img src={Images.ico.orbGreen}/></div>
+                                            <div className="button-assemble-name">Рецепты</div>
+                                        </div>
+
                                         <div className="ingr slot1">
                                             <CSSTransitionGroup transitionName="movingItems" transitionAppear={true} transitionAppearTimeout={500} transitionEnter={true} transitionEnterTimeout={500} transitionLeave={true} transitionLeaveTimeout={500}>
                                                 {itemOnTheSlot1}
@@ -125,10 +141,13 @@ class Craft extends React.Component {
                                                 {itemOnTheSlot4}
                                             </CSSTransitionGroup>
                                         </div>
+
+
                                         <div className="button-assemble" onClick={() => this.craft(locationCraft)}>
                                             <div className="button-assemble-img"><img src={Images.ico.equip}/></div>
                                             <div className="button-assemble-name">Приготовить</div>
                                         </div>
+
                                     </div>
                                 </div>
                             </CSSTransitionGroup>

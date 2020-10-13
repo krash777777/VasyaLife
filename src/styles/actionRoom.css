@@ -28,7 +28,7 @@
 
 .actionRoom-equipment{
     width: 21vw;
-    height: 25vw;
+    height: 30vw;
     float: left;
     margin: 4vw 0 0 5vw;
     box-shadow:inset 0 2vw 5vw 0 #eeeeee;
@@ -52,7 +52,7 @@
 .button-assemble{
     height: 3vw;
     width: 12.8vw;
-    margin: 0 4vw;
+    margin: 1vw 4vw 0 4vw;
     border: white solid 0.1vw;
     background-color: #A3554B;
     border-radius: 1vw;

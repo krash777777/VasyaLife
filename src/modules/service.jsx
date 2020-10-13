@@ -153,7 +153,6 @@ function checkSlots(craftStore, consist) {
 
 function checkRecepie(recepie, craftStore){
     const consist = recepie.consist;
-
     var error = 0;
     for(var i = 0; i < consist.length; i++) {
 
@@ -176,16 +175,59 @@ function checkRecepie(recepie, craftStore){
 function findeRecepie(gameStatus, locationCraft) {
 
     const worldItemSorage = gameStatus.WorldSettings.worldItemStorage[locationCraft];
-    for(var i = 0; i < recepies.length; i++) {
 
-        var recepie = recepies[i];
+    //console.log(recepies);
+    // console.log(Object.keys(recepies).length);
+    // console.log(Object.keys(recepies)[0]);
+
+    let recepieObject = Object.keys(recepies); //преобразовали в неассациативный массив
+
+    for(var i = 0; i < recepieObject.length; i++) {
+
+        //console.log(recepieObject[i]);
+
+        var recepie = recepies[recepieObject[i]];
+
         var checkResult = checkRecepie(recepie, worldItemSorage);
 
         if (checkResult !==-1){
             return checkResult;
         }
     }
+
+    alert("Рецептов с такими ингридиентами не найдено ...");
     return -1; // на тот случай, если не нашли ни одного рецепта
 }
 
-export {findeValueOnTheArray, findeNpcInLocation, findeRecepie, getNpcRelations, checkConditions};
+function craft(options, gameStatus){
+    const playerStorage = gameStatus.Player.playerStore.items;
+    const worldItemSorage = gameStatus.WorldSettings.worldItemStorage[options.locationCraft];
+
+    let recepie = findeRecepie(gameStatus,options.locationCraft);
+
+    if (recepie!==-1){
+
+        //очистим все ячейки
+        for (var i = 1; i < 5; i++) {
+            var slot = worldItemSorage['slot' + i];
+            slot.splice(0,1);
+        }
+        //добавим в инвентарь результат готовки (причем нужно учесть, что предметов в результате может быть несколько)
+        for (var a = 0; a < recepie.length; a++){
+            var itemId = recepie[a].item.id;
+
+            let receiverIndex = findeValueOnTheArray(itemId,playerStorage, 'arrayItemId');
+            if (receiverIndex !== -1){
+                playerStorage[receiverIndex].quantity = playerStorage[receiverIndex].quantity+recepie[a].quantity;
+            } else {
+                playerStorage[playerStorage.length] = {item:recepie[a].item,quantity:recepie[a].quantity};
+            }
+        }
+
+
+    }
+
+    return gameStatus;
+}
+
+export {findeValueOnTheArray, findeNpcInLocation, findeRecepie, getNpcRelations, checkConditions, craft};

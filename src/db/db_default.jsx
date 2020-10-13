@@ -57,7 +57,10 @@ const defaultValues = {
             clothingSet:clothingSets.blueSetFull,
             playerStore:{
                 items:[
-                    {item:items.food.apple, quantity:1},
+                    {item:items.food.apple, quantity:20},
+                    {item:items.food.egg, quantity:20},
+                    {item:items.food.flour, quantity:20},
+                    {item:items.food.sugar, quantity:20},
                 ],
                 clothing:[
 
