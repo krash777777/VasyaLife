@@ -3,6 +3,66 @@ import { CSSTransitionGroup } from 'react-transition-group';
 
 import Images from '../db/db_img.jsx';
 import templates from '../db/db_templates.jsx';
+import {findeValueOnTheArray} from "../modules/service.jsx";
+
+function InfoBox(props) {
+
+    let thisState = props.thisState;
+
+    if (thisState.showItemInfo == false){
+        var styleInfoBox = 'none';
+        return <div></div>;
+    } if (thisState.showItemInfo == true){
+        var styleInfoBox = 'block';
+    }
+
+    return (
+        <div>
+            <div className="centered modale-background" style={{display:styleInfoBox}}></div>
+
+            <CSSTransitionGroup
+                transitionName="stretchZ"
+                transitionAppear={true} transitionAppearTimeout={500}
+                transitionEnter={false} transitionEnterTimeout={500}
+                transitionLeave={false} transitionLeaveTimeout={500}
+            >
+                <div className="centered info-box-recipes" style={{display:styleInfoBox}}>
+                    <a className='info-box-recipes-header'>Доступные рецепты</a>
+                    <a className="close" onClick={() => props.toggleVisionInfoBox(false)}>X</a>
+
+                    <div className='info-box-recipes-rows'>
+                        <div className='row-recipe'>
+                            <div className='row-ingr'>
+                                <div className='ingr-box ingr-box-right'>
+                                    <img src={Images.items.food.apple}/>
+                                    <span className="numberOfItems">{10}</span>
+                                </div>
+                                <div className='ingr-box ingr-box-right'><img src={Images.items.food.apple}/></div>
+                                <div className='ingr-box ingr-box-right'><img src={Images.items.food.apple}/></div>
+                                <div className='ingr-box ingr-box-right'><img src={Images.items.food.apple}/></div>
+                            </div>
+                            <div className='row-equal'>=
+                                {/*<div className='ingr-box ingr-box-right'>=</div>*/}
+                            </div>
+                            <div className='row-result'>
+                                <div className='ingr-box ingr-box-left'><img src={Images.items.food.apple}/></div>
+                                <div className='ingr-box ingr-box-left'><img src={Images.items.food.apple}/></div>
+                                <div className='ingr-box ingr-box-left'><img src={Images.items.food.apple}/></div>
+                            </div>
+                        </div>
+
+                        <div className='row-recipe'></div>
+                        <div className='row-recipe'></div>
+     
+                    </div>
+
+
+                </div>
+            </CSSTransitionGroup>
+        </div>
+
+    );
+}
 
 class Craft extends React.Component {
     constructor(props) {
@@ -14,8 +74,9 @@ class Craft extends React.Component {
         this.setState({focus:newFocus});
     }
 
-    showRecipes(){
-        alert('Показываем доступные рецепты');
+    toggleVisionInfoBox(showInfoBox){
+        //alert('Показываем доступные рецепты');
+        this.setState({showItemInfo:showInfoBox});
     }
 
     craft(locationCraft){
@@ -116,7 +177,7 @@ class Craft extends React.Component {
                                     <div className="actionRoom-equipment">
 
 
-                                        <div className="button-assemble" onClick={() => this.showRecipes()}>
+                                        <div className="button-assemble" onClick={() => this.toggleVisionInfoBox()}>
                                             <div className="button-assemble-img"><img src={Images.ico.orbGreen}/></div>
                                             <div className="button-assemble-name">Рецепты</div>
                                         </div>
@@ -151,6 +212,8 @@ class Craft extends React.Component {
                                     </div>
                                 </div>
                             </CSSTransitionGroup>
+
+                            <InfoBox thisState={this.state} globalData={this.props.data} toggleVisionInfoBox={(showInfoBox)=>this.toggleVisionInfoBox(showInfoBox, '')} useItem = {(interactionIndex, itemQuantity)=>this.useItem(interactionIndex, itemQuantity)} />
                         </div>
 
                     </div>

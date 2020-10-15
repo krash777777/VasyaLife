@@ -84,10 +84,100 @@ img{
     opacity: 0.3;
 }
 
+.info-box-recipes{
+    height: 30vw;
+    width: 50vw;
+
+    /*background: linear-gradient(to bottom, rgba(242,245,246,1) 0%,rgba(227,234,237,0.96) 37%,rgba(200,215,220,0.9) 100%);*/
+    background: linear-gradient(to bottom, rgba(254,252,234,1) 0%,rgba(241,218,54,0.9) 100%);
+    border-radius: 0.33vw;
+    border: white solid 2px;
+}
+
+.info-box-recipes-header{
+    font-size: 1vw;
+    font-weight: bold;
+    margin: 1%;
+}
+
+.info-box-recipes-rows{
+    width: 97%;
+    height: 88%;
+
+    margin: 2% 3% 0 0;
+    overflow: auto;
+    /*background-color: #9B4D4D;*/
+}
+
+.row-recipe{
+    width: 96%;
+    height: 5vw;
+    /*background-color: #97AFB7;*/
+    border-radius: 0.2vw;
+    margin: 0.2vw 0.5vw;
+    float: right;
+}
+
+.row-recipe:hover{
+    cursor: pointer;
+    background-color: #00685A;
+}
+
+.row-ingr{
+    height: 4.5vw;
+    width: 50%;
+    margin: 0.2vw;
+    /*background-color: #05316D;*/
+    float: left;
+}
+
+.row-equal{
+    height: 4.5vw;
+    width: 4.5vw;
+    margin: 0.2vw 0.4vw;
+    /*background-color: #9B4D4D;*/
+    float: left;
+
+    font-size: 2.8vw;
+    color: #671A21;
+    font-weight: bold;
+    text-align: center;
+}
+
+.row-result{
+    height: 4.5vw;
+    width: 17vw;
+    margin: 0.2vw;
+    /*background-color: #671A21;*/
+    float: left;
+}
+
+.ingr-box{
+    height: 4.5vw;
+    width: 4.5vw;
+    margin: 0 0.3vw;
+    border-radius: 0.33vw;
+
+    border: 1px white solid;
+    position: relative;
+    background: linear-gradient(to bottom, rgba(218,234,242,1) 0%,rgba(255,255,255,1) 50%,rgba(218,234,242,1) 100%);
+}
+
+.ingr-box-left{
+    float: left;
+}
+
+.ingr-box-right{
+    float: right;
+}
+
 .info-box{
     height: 15vw;
     width: 34vw;
-    background-color: #DCF900;
+    /*background-color: #DCF900;*/
+
+    background: linear-gradient(to bottom, rgba(242,245,246,0.8) 0%,rgba(227,234,237,0.84) 37%,rgba(200,215,220,0.9) 100%);
+
     border-radius: 0.33vw;
     border: white solid 2px;
 }
