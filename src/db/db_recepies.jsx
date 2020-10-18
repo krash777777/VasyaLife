@@ -4,9 +4,9 @@ const recepies = {
     test:{
         id:'test',
         consist:[
-            {item:items.food.flour,quantity:1},
-            {item:items.food.sugar,quantity:1},
-            {item:items.food.egg,quantity:1},
+            {item:items.food.flour,quantity:2},
+            {item:items.food.sugar,quantity:3},
+            {item:items.food.egg,quantity:4},
             {item:items.food.apple,quantity:1},
         ],
         result:[

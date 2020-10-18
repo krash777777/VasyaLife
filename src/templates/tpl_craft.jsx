@@ -16,6 +16,36 @@ function InfoBox(props) {
         var styleInfoBox = 'block';
     }
 
+
+    const listOfRecipes = props.globalData.Player.recipesAccess.map((arrRecipes, index)=>
+
+        <div className='row-recipe' key={index}
+             onClick={() => props.choiceRecipe(arrRecipes.recipe.consist)}
+        >
+
+            <div className='row-ingr'>
+                {arrRecipes.recipe.consist.map((ingr, recipeIndex) =>
+                    <div className='ingr-box ingr-box-right' key={recipeIndex}>
+                        <img src={ingr.item.image}/>
+                        <span className="numberOfItems">{ingr.quantity}</span>
+                    </div>
+                )}
+            </div>
+
+            <div className='row-equal'>=</div>
+
+            <div className='row-result'>
+                {arrRecipes.recipe.result.map((result, resultIndex) =>
+                    <div className='ingr-box ingr-box-left' key={resultIndex}>
+                        <img src={result.item.image}/>
+                        <span className="numberOfItems">{result.quantity}</span>
+                    </div>
+                )}
+            </div>
+        </div>
+
+    );
+
     return (
         <div>
             <div className="centered modale-background" style={{display:styleInfoBox}}></div>
@@ -31,29 +61,7 @@ function InfoBox(props) {
                     <a className="close" onClick={() => props.toggleVisionInfoBox(false)}>X</a>
 
                     <div className='info-box-recipes-rows'>
-                        <div className='row-recipe'>
-                            <div className='row-ingr'>
-                                <div className='ingr-box ingr-box-right'>
-                                    <img src={Images.items.food.apple}/>
-                                    <span className="numberOfItems">{10}</span>
-                                </div>
-                                <div className='ingr-box ingr-box-right'><img src={Images.items.food.apple}/></div>
-                                <div className='ingr-box ingr-box-right'><img src={Images.items.food.apple}/></div>
-                                <div className='ingr-box ingr-box-right'><img src={Images.items.food.apple}/></div>
-                            </div>
-                            <div className='row-equal'>=
-                                {/*<div className='ingr-box ingr-box-right'>=</div>*/}
-                            </div>
-                            <div className='row-result'>
-                                <div className='ingr-box ingr-box-left'><img src={Images.items.food.apple}/></div>
-                                <div className='ingr-box ingr-box-left'><img src={Images.items.food.apple}/></div>
-                                <div className='ingr-box ingr-box-left'><img src={Images.items.food.apple}/></div>
-                            </div>
-                        </div>
-
-                        <div className='row-recipe'></div>
-                        <div className='row-recipe'></div>
-     
+                        {listOfRecipes}
                     </div>
 
 
@@ -75,8 +83,102 @@ class Craft extends React.Component {
     }
 
     toggleVisionInfoBox(showInfoBox){
-        //alert('Показываем доступные рецепты');
         this.setState({showItemInfo:showInfoBox});
+    }
+
+    clearCraftSlots(){
+        let locationCraft = this.props.data.WorldSettings.worldItemStorage[this.props.data.General.location.id+'Craft'];
+
+        for (var slotNumber=1; slotNumber<5; slotNumber++){
+
+            if (locationCraft['slot'+slotNumber].length>0){
+                var itemQuantityOnTheSlot = locationCraft['slot'+slotNumber][0].quantity;
+
+                for (var a=0; a<itemQuantityOnTheSlot; a++){
+                    this.moveCraftItem('slot->playerStorage', 0, 'slot'+slotNumber, this.props.data.General.location.id+'Craft');
+                }
+            }
+        }
+    }
+
+    choiceRecipe(arrRecipeConsist){
+        //очищаем уже установленные ингридиенты
+        let locationCraft = this.props.data.WorldSettings.worldItemStorage[this.props.data.General.location.id+'Craft'];
+
+        this.clearCraftSlots();
+
+        let playerStore = this.props.data.Player.playerStore.items;
+
+        let arrRecipeConsistSort = [];
+        for(var i = 0; i < arrRecipeConsist.length; i++) {
+            let indexItem = findeValueOnTheArray(arrRecipeConsist[i].item.id, playerStore, 'arrayItemId');
+
+            arrRecipeConsistSort[arrRecipeConsistSort.length] = {
+                item:arrRecipeConsist[i].item,
+                quantity:arrRecipeConsist[i].quantity,
+                index:indexItem
+            };
+
+            //console.log(arrRecipeConsist[i].item.name+' - '+indexItem);
+        }
+
+        arrRecipeConsistSort.sort(function(a, b){
+            return b.index-a.index
+        })
+
+        //console.log(arrRecipeConsistNew);
+
+        for(var i = 0; i < arrRecipeConsistSort.length; i++) {
+
+            let indexItem = findeValueOnTheArray(arrRecipeConsistSort[i].item.id, playerStore, 'arrayItemId');
+
+            //console.log(arrRecipeConsist[i].item.name+' - '+indexItem);
+
+            //найдем количество ингридиента в слоте найденного ингридиента
+            var itemQuantityOnTheSlot = 0;
+            var currentSlot = '';
+            for (var slotNumber=1; slotNumber<5; slotNumber++){
+                currentSlot = 'slot'+slotNumber;
+                if (locationCraft[currentSlot].length>0){
+                    //console.log(locationCraft['slot'+slotNumber][0].item.id+' = '+arrRecipeConsist[i].item.id);
+
+                    if (locationCraft[currentSlot][0].item.id == arrRecipeConsistSort[i].item.id){
+                        itemQuantityOnTheSlot = locationCraft['slot'+slotNumber][0].quantity;
+                    }
+                }
+            }
+
+
+            if(indexItem!==-1){
+
+                //проверка на количество (списываем только из остатка на складе ... так же учтем количество, которое сейчас в ячейке)
+
+                let quantityToRemove = arrRecipeConsistSort[i].quantity;
+                let balance = playerStore[indexItem].quantity+itemQuantityOnTheSlot;
+
+                if (arrRecipeConsistSort[i].quantity>=balance){
+                    quantityToRemove = balance;
+                }
+
+                console.log(arrRecipeConsistSort[i].item.name+':   remove:'+quantityToRemove+'; recipe:'+arrRecipeConsistSort[i].quantity+'; slot:'+itemQuantityOnTheSlot);
+
+                 for (var a=0; a<quantityToRemove; a++){
+                     this.moveCraftItem('playerStorage->slot', indexItem, 'playerItems', this.props.data.General.location.id+'Craft');
+                }
+            } else {
+                //данная ветку нужна, для случая, когда в инвентаре нет предмета, а в одном из слотов есть
+
+                if (itemQuantityOnTheSlot!==0){
+                    let storeSlot = this.props.data.WorldSettings.worldItemStorage[this.props.data.General.location.id+'Craft'][currentSlot];
+                    for (var a=0; a<itemQuantityOnTheSlot; a++){
+                        playerStore[playerStore.length] = {item:storeSlot[0].item,quantity:1};
+                        this.moveCraftItem('playerStorage->slot', 0, 'playerItems', this.props.data.General.location.id+'Craft');
+                    }
+                }
+            }
+        }
+
+        this.toggleVisionInfoBox(false);
     }
 
     craft(locationCraft){
@@ -91,7 +193,6 @@ class Craft extends React.Component {
             source:source,
             locationCraft:locationCraft
         };
-
 
         this.props.changeStates('moveCraftItem', arrOptions);
     }
@@ -175,12 +276,13 @@ class Craft extends React.Component {
                                     {/*</div>*/}
 
                                     <div className="actionRoom-equipment">
+                                        <a className="text-link ingr-box-left" onClick={() => this.toggleVisionInfoBox(true)}>Доступные рецепты</a>
+                                        <a className="text-link ingr-box-right" onClick={() => this.clearCraftSlots()}>Очистить</a>
 
-
-                                        <div className="button-assemble" onClick={() => this.toggleVisionInfoBox()}>
-                                            <div className="button-assemble-img"><img src={Images.ico.orbGreen}/></div>
-                                            <div className="button-assemble-name">Рецепты</div>
-                                        </div>
+                                        {/*<div className="button-assemble" onClick={() => this.toggleVisionInfoBox(true)}>*/}
+                                            {/*<div className="button-assemble-img"><img src={Images.ico.orbGreen}/></div>*/}
+                                            {/*<div className="button-assemble-name">Рецепты</div>*/}
+                                        {/*</div>*/}
 
                                         <div className="ingr slot1">
                                             <CSSTransitionGroup transitionName="movingItems" transitionAppear={true} transitionAppearTimeout={500} transitionEnter={true} transitionEnterTimeout={500} transitionLeave={true} transitionLeaveTimeout={500}>
@@ -205,15 +307,15 @@ class Craft extends React.Component {
 
 
                                         <div className="button-assemble" onClick={() => this.craft(locationCraft)}>
-                                            <div className="button-assemble-img"><img src={Images.ico.equip}/></div>
-                                            <div className="button-assemble-name">Приготовить</div>
+                                            {/*<div className="button-assemble-img"><img src={Images.ico.equip}/></div>*/}
+                                            <div className="button-assemble-name">Готовить</div>
                                         </div>
 
                                     </div>
                                 </div>
                             </CSSTransitionGroup>
 
-                            <InfoBox thisState={this.state} globalData={this.props.data} toggleVisionInfoBox={(showInfoBox)=>this.toggleVisionInfoBox(showInfoBox, '')} useItem = {(interactionIndex, itemQuantity)=>this.useItem(interactionIndex, itemQuantity)} />
+                            <InfoBox thisState={this.state} globalData={this.props.data} toggleVisionInfoBox={(showInfoBox)=>this.toggleVisionInfoBox(showInfoBox, '')} choiceRecipe={(arrRecipe)=>this.choiceRecipe(arrRecipe)} />
                         </div>
 
                     </div>

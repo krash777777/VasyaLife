@@ -253,7 +253,6 @@ class Game extends React.Component {
             const worldItemSorage = gameStatus.WorldSettings.worldItemStorage[options.locationCraft];
 
             if (options.moveType == 'playerStorage->slot'){
-                //console.log(options.moveType );
 
                 let item = playerStorage[options.index].item;
                 let arrSlot = this.findeSlot(worldItemSorage, item);

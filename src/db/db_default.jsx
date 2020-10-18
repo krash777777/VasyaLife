@@ -7,6 +7,8 @@ import playerOptionsModifiers from './db_playerOptionsModifiers.jsx';
 import clothing from './db_clothing.jsx';
 import clothingSets from './db_clothingSets.jsx';
 import npc from './db_npc.jsx';
+import recipes from './db_recepies.jsx';
+
 
 import Images from './db_img.jsx';
 
@@ -51,6 +53,9 @@ const defaultValues = {
             ],
             modifiers:[
                 // {modifier:playerOptionsModifiers.exhaustion, actionTime:999999999}
+            ],
+            recipesAccess:[
+                {recipe:recipes.test},
             ],
             skills:[],
             clothingOnTheBody:[clothing.blueShirt,clothing.blueJeans,],
