@@ -3,6 +3,7 @@ import items from './db_items.jsx';
 const recepies = {
     test:{
         id:'test',
+        discription:'test',
         consist:[
             {item:items.food.flour,quantity:2},
             {item:items.food.sugar,quantity:3},
@@ -17,6 +18,7 @@ const recepies = {
 
     cake:{
         id:'cake',
+        discription:'Очень вкусное пироженое',
         consist:[
             {item:items.food.flour,quantity:4},
             {item:items.food.sugar,quantity:3},

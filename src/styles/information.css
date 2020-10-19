@@ -189,8 +189,14 @@
     font-weight: bold;
 }
 
-.recipeItem{
+.recipeResultShell{
+    width: 12vw;
+    height: 3.2vw;
     float: left;
+}
+
+.recipeItem{
+    float: right;
     height: 3vw;
     width: 3vw;
     margin: 0.2vw 0 0 0.3vw;
@@ -260,7 +266,7 @@
 }
 
 .recipeItemDiscription-width{
-    width: 45%;
+    width: 28%;
 }
 
 .npcIco{
