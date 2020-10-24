@@ -196,7 +196,7 @@
 }
 
 .recipeItem{
-    float: right;
+    float: left;
     height: 3vw;
     width: 3vw;
     margin: 0.2vw 0 0 0.3vw;
@@ -210,6 +210,15 @@
 .recipeItem:hover{
     -webkit-box-shadow:inset 0 0 2vw 0 #B0B2B3;
     cursor: pointer;
+}
+
+.recipeDecorEquals{
+    font-weight: bold;
+    font-size: 2.5vw;
+    text-align: center;
+    display: block;
+    float: left;
+    color: #671A21;
 }
 
 .recipeNumberOfItems{

@@ -6,6 +6,7 @@ import quests from '../db_quests.jsx';
 import modifiers from '../db_playerOptionsModifiers.jsx';
 import Npc from '../db_npc.jsx';
 import NpcStyles from '../db_npcImageStyle.jsx';
+import recipes from '../db_recepies.jsx';
 
 const Scenes_Intro = {
     block00:{
@@ -296,6 +297,7 @@ const Scenes_Intro = {
         change_states:[
             {changeType:'addQuest', changeValue:quests.mainLine.findPrincipal},
             {changeType:'addModifier', changeValue:modifiers.exhaustion},
+            {changeType:'addRecipe', changeValue:recipes.cake},
         ],
         transitions:['end'],
     },

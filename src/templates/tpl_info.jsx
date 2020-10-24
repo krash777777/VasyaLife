@@ -59,27 +59,6 @@ class TabInformation extends React.Component {
 
         const listRecipes = data.Player.recipesAccess.map((arrRecipes, index)=>
             <div key={index}>
-                <div className="recipeResultShell">
-                    {arrRecipes.recipe.result.map((result, resultIndex) =>
-                        <div  key={resultIndex} className="recipeItem">
-                            <img src={result.item.image}/>
-                            <span className="recipeNumberOfItems">{result.quantity}</span>
-                        </div>
-                    )}
-                </div>
-
-                <div className="recipeItemShell recipeItemDiscription-width">
-                    <p>Наименование комплекта</p>
-                    <p className="recipeItemDiscription">{arrRecipes.recipe.discription}</p>
-                </div>
-
-                <div className="recipeItemShell effects-width">
-                    <p>Эффекты</p>
-                    <div className="component">
-                        <div className="componen-img"><img src={Images.items.food.apple}/></div>
-                        <div className={'increase' =='increase'?'component-value-plus':'component-value-minus'}>{'increase' == 'increase'?'+':'-'}{1}</div>
-                    </div>
-                </div>
 
                 <div className="recipeItemShell">
                     <p>Ингридиенты</p>
@@ -91,6 +70,32 @@ class TabInformation extends React.Component {
                         </div>
                     )}
                 </div>
+
+                <div className="recipeDecorEquals">=</div>
+
+                <div className="recipeResultShell">
+                    {arrRecipes.recipe.result.map((result, resultIndex) =>
+                        <div  key={resultIndex} className="recipeItem">
+                            <img src={result.item.image}/>
+                            <span className="recipeNumberOfItems">{result.quantity}</span>
+                        </div>
+                    )}
+                </div>
+
+                {/*<div className="recipeItemShell recipeItemDiscription-width">*/}
+                    {/*<p>Наименование комплекта</p>*/}
+                    {/*<p className="recipeItemDiscription">{arrRecipes.recipe.discription}</p>*/}
+                {/*</div>*/}
+
+                {/*<div className="recipeItemShell effects-width">*/}
+                    {/*<p>Эффекты</p>*/}
+                    {/*<div className="component">*/}
+                        {/*<div className="componen-img"><img src={Images.items.food.apple}/></div>*/}
+                        {/*<div className={'increase' =='increase'?'component-value-plus':'component-value-minus'}>{'increase' == 'increase'?'+':'-'}{1}</div>*/}
+                    {/*</div>*/}
+                {/*</div>*/}
+
+
             </div>
         );
 

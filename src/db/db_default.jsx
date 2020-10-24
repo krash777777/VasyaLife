@@ -55,7 +55,8 @@ const defaultValues = {
                 // {modifier:playerOptionsModifiers.exhaustion, actionTime:999999999}
             ],
             recipesAccess:[
-                {recipe:recipes.test},
+                // {recipe:recipes.test},
+                // {recipe:recipes.cake},
             ],
             skills:[],
             clothingOnTheBody:[clothing.blueShirt,clothing.blueJeans,],

@@ -11,6 +11,7 @@ function findeValueOnTheArray(id, array, option){
         if(option === 'arrayTypeClothing') {if(array[i].partOfBody === id) {return {index:i, itemOfClothing:array[i]}}}
         if(option === 'arrayOptionId') {if(array[i].option.id === id) {return i}};
         if(option === 'arrayModifireId') {if(array[i].modifier.id === id) {return i}};
+        if(option === 'arrayRecipeList') {if(array[i].recipe === id) {return i}};
         if(option === 'arrayQuest') {if(array[i].id=== id) {return i}};
     }
     return -1; //to handle the case where the value doesn't exist

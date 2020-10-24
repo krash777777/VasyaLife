@@ -326,6 +326,10 @@ function changeGameStates_fromScene(options, gameStatus) {
 
             gameStatus = deleteModifier(options[i].changeValue, gameStatus);
 
+        } if (type == 'addRecipe'){
+
+            gameStatus = addRecipeOnTheList(options[i].changeValue, gameStatus)
+
         } if (type == 'changeOptions'){
 
             var changeOptions = options[i].changeValue;
@@ -410,4 +414,18 @@ function deleteModifier(modifier, gameStatus) {
     return gameStatus;
 }
 
-export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier};
+function addRecipeOnTheList(recipe, gameStatus) {
+    let playerRecipeList= gameStatus.Player.recipesAccess;
+
+    //ищем в списке наш рецепт ... если не находим, то добавляем
+    var excitiongRecipe = findeValueOnTheArray(recipe, playerRecipeList, 'arrayRecipeList');
+
+    if (excitiongRecipe == -1){
+        playerRecipeList[playerRecipeList.length] = {recipe:recipe};
+        gameStatus.Player.recipesAccess = playerRecipeList;
+    }
+
+    return gameStatus;
+}
+
+export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList};
