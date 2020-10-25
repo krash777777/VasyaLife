@@ -4,6 +4,26 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import Images from '../db/db_img.jsx';
 import templates from '../db/db_templates.jsx';
 
+function getModifiersOnTheBody(dataPlayer) {
+
+    let arrModifiers = [];
+
+    //получим все модификаторы отдельных вещей
+    let clothingOnTheBody = dataPlayer.clothingOnTheBody;
+    for(var clothingIndex in clothingOnTheBody){
+        if (clothingOnTheBody[clothingIndex].modifire!==''){
+            arrModifiers[arrModifiers.length] = clothingOnTheBody[clothingIndex].modifire;
+        }
+    }
+
+    //получим модификатор сета
+    if (dataPlayer.clothingSet.modifire!==''){
+        arrModifiers[arrModifiers.length] = dataPlayer.clothingSet.modifire;
+    }
+
+    return arrModifiers;
+}
+
 class Wardrobe extends React.Component {
     constructor(props) {
         super(props);
@@ -26,25 +46,58 @@ class Wardrobe extends React.Component {
         this.props.changeStates('changeClothes', {type:type, itemOfClothing:itemOfClothing, index:index})
     }
 
+
+
     render() {
         const location = this.props.data.General.location;
         const arrItemsOnTheBody = this.props.data.Player.clothingOnTheBody;
         const clothingSet = this.props.data.Player.clothingSet;
         const imgResult = <img className="centered" src={clothingSet.setImages[this.state.indexImg]}/>;
 
+        let modifiersOnTheBody = getModifiersOnTheBody(this.props.data.Player);
 
         const listOfClothing = this.props.data.Player.playerStore.clothing.map((itemOfClothing, index)=>
-            <div className="itemOfClothing" key={index.toString()} style={{height:itemOfClothing.size.height,width:itemOfClothing.size.width}} onClick={() => this.changeClothes('putOn',itemOfClothing, index)}>
+            <div className="itemOfClothing"
+                 key={index.toString()}
+                 style={{height:itemOfClothing.size.height,width:itemOfClothing.size.width}}
+                 onClick={() => this.changeClothes('putOn',itemOfClothing, index)}
+            >
                 <img src={itemOfClothing.image}/>
             </div>
         );
 
+        let listModifiersOnTheBody = modifiersOnTheBody.map((mod, index)=>
+            <div className="clothingModifiersShell" key={index.toString()}>
+
+                <img className="modifierImg" src={mod.image}/>
+
+                <div className="modifierDiscription">
+                    <p>{mod.discription}</p>
+                </div>
+
+                {mod.modifiers.map((option, optionIndex)=>
+
+                    <div className="modifierComponent" key={optionIndex.toString()}>
+                        <img className="modifierComponentImg" src={option.option.image}/>
+                        <div className={option.value>=0?'component-value-plus':'component-value-minus'}>
+                            {option.value>=0?'+':''}
+                            {option.value}
+                        </div>
+                    </div>
+                )}
+
+            </div>
+
+        );
 
         //className="cellForClothes body"
 
         const itemOnTheBody = this.props.data.Player.clothingOnTheBody.map((itemOfClothing, index)=>
             <div className={itemOfClothing.partOfBody +' cellForClothes'} key={index.toString()}>
-                <div className="itemOfClothing" style={{height:itemOfClothing.size.height,width:itemOfClothing.size.width}} onClick={() => this.changeClothes('takeOff',itemOfClothing, index)}>
+                <div className="itemOfClothing"
+                     style={{height:itemOfClothing.size.height,width:itemOfClothing.size.width}}
+                     onClick={() => this.changeClothes('takeOff',itemOfClothing, index)}
+                >
                     <img src={itemOfClothing.image}/>
                 </div>
             </div>
@@ -99,7 +152,10 @@ class Wardrobe extends React.Component {
                                             {itemOnTheBody}
                                         </div>
 
-                                        <div className="infoClothingStyle">{listOfClothingSetDiscription}</div>
+                                        <div className="infoClothingStyle">
+                                            {listModifiersOnTheBody}
+                                        </div>
+
                                     </CSSTransitionGroup>
                                 </div>
 

@@ -251,6 +251,9 @@
     cursor: pointer;
 }
 
+
+
+
 .recipeItemShell{
     border-radius: 0.3vw;
     border-top: 1px white solid;
@@ -264,6 +267,7 @@
     font-weight: bold;
     background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%);
 }
+
 
 .recipeItemDiscription{
     color: #671A21;

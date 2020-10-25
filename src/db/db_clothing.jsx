@@ -1,4 +1,5 @@
 import Images from './db_img.jsx';
+import playerModifiers from './db_playerOptionsModifiers.jsx';
 
 const clothing = {
     blueJeans:{
@@ -7,6 +8,7 @@ const clothing = {
         partOfBody:'legs',
         image:Images.clothing.blueJeans,
         size:{height: '6vw',width: '4vw'},
+        modifire:'',
         price:55
     },
     blueShirt:{
@@ -15,6 +17,7 @@ const clothing = {
         partOfBody:'body',
         image:Images.clothing.blueShirt,
         size:{height: '6vw',width: '4vw'},
+        modifire:'',
         price:32
     },
     blueSkirt:{
@@ -23,6 +26,7 @@ const clothing = {
         partOfBody:'legs',
         image:Images.clothing.blueSkirt,
         size:{height: '6vw',width: '4vw'},
+        modifire:'',
         price:39
     },
     orangeBriefs:{
@@ -31,6 +35,7 @@ const clothing = {
         partOfBody:'hips',
         image:Images.clothing.orangeBriefs,
         size:{height: '4vw',width: '4vw'},
+        modifire:playerModifiers.orangeBriefs,
         price:12
     },
     orangeShirt:{
@@ -39,6 +44,7 @@ const clothing = {
         partOfBody:'body',
         image:Images.clothing.orangeShirt,
         size:{height: '6vw',width: '4vw'},
+        modifire:playerModifiers.coffee,
         price:42
     },
 }

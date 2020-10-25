@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 
-import {changeGameStates_fromScene} from './modules/options.jsx';
+import {changeGameStates_fromScene, changeClothes} from './modules/options.jsx';
 
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './modules/events.jsx';
 import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions, craft} from './modules/service.jsx';
@@ -54,39 +54,6 @@ class Game extends React.Component {
     constructor() {
         super();
         this.state = defaultValues.HomePage; //домашняя стрница, при запуске index.html
-    }
-
-    getClothingSet(arrItemsOnTheBody){
-
-        for(var set in clothingSets){
-            //body
-            const itmBody = findeValueOnTheArray('body', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('body', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
-            const itmSetBody  = clothingSets[set].clothingOnTheBody.body=='empty'?'empty':clothingSets[set].clothingOnTheBody.body.id;
-            const comparisonResultBody = clothingSets[set].clothingOnTheBody.body=='irrelevant'?0:(itmBody==itmSetBody?0:1);
-
-            //legs
-            const itmLegs = findeValueOnTheArray('legs', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('legs', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
-            const itmSetLegs  = clothingSets[set].clothingOnTheBody.legs=='empty'?'empty':clothingSets[set].clothingOnTheBody.legs.id;
-            const comparisonResultLegs = clothingSets[set].clothingOnTheBody.legs=='irrelevant'?0:(itmLegs==itmSetLegs?0:1);
-
-            //chest
-            const itmChest = findeValueOnTheArray('chest', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('chest', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
-            const itmSetChest  = clothingSets[set].clothingOnTheBody.chest=='empty'?'empty':clothingSets[set].clothingOnTheBody.chest.id;
-            const comparisonResultChest = clothingSets[set].clothingOnTheBody.chest=='irrelevant'?0:(itmChest==itmSetChest?0:1);
-
-            //hips
-            const itmHips = findeValueOnTheArray('hips', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('hips', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
-            const itmSetHips  = clothingSets[set].clothingOnTheBody.hips=='empty'?'empty':clothingSets[set].clothingOnTheBody.hips.id;
-            const comparisonResultHips = clothingSets[set].clothingOnTheBody.hips=='irrelevant'?0:(itmHips==itmSetHips?0:1);
-
-            const comparisonResult = comparisonResultBody+comparisonResultLegs+comparisonResultChest+comparisonResultHips;
-            //console.log(comparisonResultBody+'+'+comparisonResultLegs+'+'+comparisonResultChest+'+'+comparisonResultHips+'='+comparisonResult)
-
-            if (comparisonResult==0){
-                return clothingSets[set];
-            }
-        }
-        return clothingSets.wrongSet;
     }
 
     homePageMenuCommands(command){
@@ -302,24 +269,9 @@ class Game extends React.Component {
             gameStatus = purchaseClothing(options, gameStatus);
 
         }if (command == 'changeClothes'){
-            if (options.type == 'putOn'){
 
-                //нужно очистить ячейку части тела, прежде чем помещать туда одежду
-                const arrItemOnTheBody = findeValueOnTheArray(options.itemOfClothing.partOfBody, gameStatus.Player.clothingOnTheBody, 'arrayTypeClothing');
-                if (arrItemOnTheBody !== -1){
-                    gameStatus.Player.playerStore.clothing[gameStatus.Player.playerStore.clothing.length] = arrItemOnTheBody.itemOfClothing;
-                    gameStatus.Player.clothingOnTheBody.splice(arrItemOnTheBody.index,1);
-                }
+            gameStatus = changeClothes(options, gameStatus);
 
-                //выполним перемещение одежды на тело
-                gameStatus.Player.clothingOnTheBody[gameStatus.Player.clothingOnTheBody.length] = options.itemOfClothing;
-                gameStatus.Player.playerStore.clothing.splice(options.index,1);
-            }if (options.type == 'takeOff'){
-                gameStatus.Player.playerStore.clothing[gameStatus.Player.playerStore.clothing.length] = options.itemOfClothing;
-                gameStatus.Player.clothingOnTheBody.splice(options.index,1);
-            }
-
-            gameStatus.Player.clothingSet = this.getClothingSet(gameStatus.Player.clothingOnTheBody);
         }
 
         this.performTransformations(gameStatus);

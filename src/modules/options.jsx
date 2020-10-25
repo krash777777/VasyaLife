@@ -5,7 +5,7 @@ import templates from '../db/db_templates.jsx';
 import locations from '../db/db_locations.jsx';
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './events.jsx';
 import items from '../db/db_items.jsx';
-
+import clothingSets from '../db/db_clothingSets.jsx';
 
 function changeTimeData(CurrentTimeAndDate, Interval){
     return alert('переделать эту процедуру изменения времени на общую');;
@@ -388,8 +388,8 @@ function addModifier(modifier, gameStatus) {
         playerModifiers[playerModifiers.length] = {modifier:modifier, actionTime:modifier.actionTime};
     } else {
         //обновляем время
-        console.log(playerModifiers[modifireIndex].actionTime+' - ');
-        console.log(modifier.actionTime);
+        // console.log(playerModifiers[modifireIndex].actionTime+' - ');
+        // console.log(modifier.actionTime);
 
         playerModifiers[modifireIndex].actionTime = modifier.actionTime;
 
@@ -428,4 +428,103 @@ function addRecipeOnTheList(recipe, gameStatus) {
     return gameStatus;
 }
 
-export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList};
+function changeClothes(options, gameStatus) {
+
+    if (options.type == 'putOn'){
+
+        //нужно очистить ячейку части тела, прежде чем помещать туда одежду
+        const arrItemOnTheBody = findeValueOnTheArray(options.itemOfClothing.partOfBody, gameStatus.Player.clothingOnTheBody, 'arrayTypeClothing');
+        if (arrItemOnTheBody !== -1){
+            gameStatus.Player.playerStore.clothing[gameStatus.Player.playerStore.clothing.length] = arrItemOnTheBody.itemOfClothing;
+            gameStatus.Player.clothingOnTheBody.splice(arrItemOnTheBody.index,1);
+        }
+
+        //выполним перемещение одежды на тело
+        gameStatus.Player.clothingOnTheBody[gameStatus.Player.clothingOnTheBody.length] = options.itemOfClothing;
+        gameStatus.Player.playerStore.clothing.splice(options.index,1);
+
+        //добавим модификаторы одежды
+        if (options.itemOfClothing.modifire!==''){
+            gameStatus = addModifier(options.itemOfClothing.modifire, gameStatus);
+        }
+
+    }if (options.type == 'takeOff'){
+        gameStatus.Player.playerStore.clothing[gameStatus.Player.playerStore.clothing.length] = options.itemOfClothing;
+        gameStatus.Player.clothingOnTheBody.splice(options.index,1);
+
+        //удалим модификаторы одежды
+        if (options.itemOfClothing.modifire!==''){
+            gameStatus = deleteModifier(options.itemOfClothing.modifire, gameStatus);
+        }
+    }
+
+    let foundClosingSet = checkClothingSet(gameStatus.Player.clothingOnTheBody);
+    if (foundClosingSet!==-1){
+
+        //нужно удалить модификатор который стоял до этого
+        if (gameStatus.Player.clothingSet.modifire!=='') {
+            gameStatus = deleteModifier(gameStatus.Player.clothingSet.modifire, gameStatus);
+        }
+
+        //добавим модификатор сета
+        if (foundClosingSet.modifire!==''){
+            gameStatus = addModifier(foundClosingSet.modifire, gameStatus);
+        }
+
+        gameStatus.Player.clothingSet = foundClosingSet;
+    } else {
+        //console.log(gameStatus.Player.clothingSet);
+
+        //удалим модификаторы сета
+        if (gameStatus.Player.clothingSet.modifire!==''){
+            gameStatus = deleteModifier(gameStatus.Player.clothingSet.modifire, gameStatus);
+        }
+
+        gameStatus.Player.clothingSet = clothingSets.wrongSet;
+
+        if (clothingSets.wrongSet.modifire!==''){
+            gameStatus = addModifier(clothingSets.wrongSet.modifire, gameStatus);
+        }
+    }
+
+
+    //gameStatus.Player.clothingSet = getClothingSet(gameStatus.Player.clothingOnTheBody, gameStatus);
+
+    return gameStatus;
+}
+
+function checkClothingSet(arrItemsOnTheBody) {
+
+    for(var set in clothingSets){
+
+        //body
+        const itmBody = findeValueOnTheArray('body', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('body', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
+        const itmSetBody  = clothingSets[set].clothingOnTheBody.body=='empty'?'empty':clothingSets[set].clothingOnTheBody.body.id;
+        const comparisonResultBody = clothingSets[set].clothingOnTheBody.body=='irrelevant'?0:(itmBody==itmSetBody?0:1);
+
+        //legs
+        const itmLegs = findeValueOnTheArray('legs', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('legs', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
+        const itmSetLegs  = clothingSets[set].clothingOnTheBody.legs=='empty'?'empty':clothingSets[set].clothingOnTheBody.legs.id;
+        const comparisonResultLegs = clothingSets[set].clothingOnTheBody.legs=='irrelevant'?0:(itmLegs==itmSetLegs?0:1);
+
+        //chest
+        const itmChest = findeValueOnTheArray('chest', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('chest', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
+        const itmSetChest  = clothingSets[set].clothingOnTheBody.chest=='empty'?'empty':clothingSets[set].clothingOnTheBody.chest.id;
+        const comparisonResultChest = clothingSets[set].clothingOnTheBody.chest=='irrelevant'?0:(itmChest==itmSetChest?0:1);
+
+        //hips
+        const itmHips = findeValueOnTheArray('hips', arrItemsOnTheBody, 'arrayTypeClothing')==-1?'empty':findeValueOnTheArray('hips', arrItemsOnTheBody, 'arrayTypeClothing').itemOfClothing.id;
+        const itmSetHips  = clothingSets[set].clothingOnTheBody.hips=='empty'?'empty':clothingSets[set].clothingOnTheBody.hips.id;
+        const comparisonResultHips = clothingSets[set].clothingOnTheBody.hips=='irrelevant'?0:(itmHips==itmSetHips?0:1);
+
+        const comparisonResult = comparisonResultBody+comparisonResultLegs+comparisonResultChest+comparisonResultHips;
+
+        if (comparisonResult==0){
+            return clothingSets[set];
+        }
+    }
+
+    return -1;
+}
+
+export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes};

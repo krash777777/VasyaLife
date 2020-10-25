@@ -1,13 +1,15 @@
 import Images from './db_img.jsx';
 import clothing from './db_clothing.jsx';
+import playerModifiers from './db_playerOptionsModifiers.jsx';
 
 const clothingSets = {
     wrongSet:{
         id:'wrongSet',
         clothingOnTheBody:{body:'',chest:'',legs:'', hips:''},//в этом сете не указываем - он выбирается по умолчанию, если нет соответствий
         setOptions:[
-            {img:Images.ico.orbRed, text:'Отсутствует сочетание одежды, я чувствую себя не комфортно ...  никуда не пойду в таком виде'}
+            {img:Images.ico.orbRed, text:'Нечего не сочитается! я чувствую себя не комфортно ...  никуда не пойду в таком виде'}
         ],//описание сета / бафы / дебафы - на основании этого массива строится общие характеристики баффа/дебафа
+        modifire:playerModifiers.wrongSet,
         setImages:[Images.character.wrongSet], // картинки в гардеробе
         setImagesForInteraction:{
             normal_1:Images.character.wrongInteractionImg,
@@ -30,6 +32,7 @@ const clothingSets = {
             {img:Images.ico.orbGreen, text:'Самые лучшие ощущения от слияния с природой без одежды.'},
             {img:Images.ico.orbYellow, text:'Я не могу показателься в общественном месте в таком виде!'}
         ],
+        modifire:playerModifiers.cake,
         setImages:[Images.character.naked.naked_set00, Images.character.naked.naked_set01],
         setImagesForInteraction:{
             normal_1:Images.character.naked.naked_normal_1,
@@ -51,6 +54,7 @@ const clothingSets = {
         setOptions:[
             {img:Images.ico.orbBlue, text:'Самая обычная повседневная одежда'},
         ],
+        modifire:'',
         setImages:[Images.character.blueSet.blue_set00, Images.character.blueSet.blue_set01],
         setImagesForInteraction:{
             normal_1:Images.character.blueSet.blue_normal_1,
@@ -72,6 +76,7 @@ const clothingSets = {
         setOptions:[
             {img:Images.ico.orbGreen, text:'Приятный яркий стиль.В таком можно и пошалить ...'},
         ],
+        modifire:'',
         setImages:[Images.character.orangeSet.orangeSet_set00, Images.character.orangeSet.orangeSet_set01],
         setImagesForInteraction:{
             normal_1:Images.character.orangeSet.orangeSet_normal_1,

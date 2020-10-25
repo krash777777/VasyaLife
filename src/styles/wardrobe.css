@@ -113,10 +113,82 @@
     border-radius: 0.2vw;
 }
 
+.clothingModifires{
+
+}
+
 .bodyFigureImg{
     width: 14vw;
     height: 28vw;
 }
+
+.clothingModifiersShell{
+    border-radius: 0.3vw;
+    border-top: 1px white solid;
+    height: 2.8vw;
+    width: 18vw;
+    float: left;
+    margin: 0.1vw 0 0 0.1vw;
+    /*padding: 0.2vw;*/
+    font-size: 0.6vw;
+    color: #89000c;
+    font-weight: bold;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0) 100%);
+}
+
+.modifierImg{
+    height: 2.3vw;
+    width: 2.3vw;
+    background-color: #FDF3BD;
+    border: #A3912C solid 1px;
+    border-radius: 0.3vw;
+    margin: 0.2vw;
+    float: left;
+}
+
+.modifierDiscription{
+    height: 2vw;
+    width: 10vw;
+    /*background-color: #FDF3BD;*/
+    float: left;
+    margin: 0.3vw;
+    text-align: left;
+}
+
+.modifierComponent{
+    float: left;
+    width: 1.7vw;
+    height: 1.7vw;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-align: center;
+    background-color: #FDF3BD;
+    border: #A3912C solid 1px;
+    border-radius: 0.3vw;
+    margin: 0.2vw 0 0 0.4vw;
+}
+
+.modifierComponentImg{
+    /*float: left;*/
+    /*height: 1.5vw;*/
+    /*width: 1.5vw;*/
+
+
+}
+
+.modifier{
+    height: 1.3vw;
+    width: 1.3vw;
+    background-color: #FDF3BD;
+    border: #A3912C solid 1px;
+    border-radius: 0.3vw;
+    margin: 0.4vw 0.2vw;
+    font-size: 0.6vw;
+    font-weight: bold;
+    text-align: center;
+}
+
+
 
 .cellForClothes{
     background-color: #eeeeee;
