@@ -227,7 +227,28 @@
     cursor: pointer;
 }
 
+.textColorRed{
+    color: red;
+}
 
+.markRed{
+    border: 1px #FF2800 solid ;
+    /*background: linear-gradient(to bottom, rgba(255,26,0,0.4) 0%,rgba(255,26,0,0.25) 50%,rgba(255,26,0,0.4) 100%);*/
+    background: linear-gradient(to bottom, rgba(255,255,136,1) 0%,rgba(255,255,136,0.4) 50%,rgba(255,255,136,1) 100%);
+}
+
+.numberOfItemsShell{
+    display: block;
+    position: absolute;
+    height: 1vw;
+    width: 2vw;
+    right: 0.25vw;
+    bottom: 0.1vw;
+    font-size: 0.6vw;
+    text-align: right;
+    color: #89000c;
+    font-weight: bold;
+}
 
 .numberOfItems{
     display: block;

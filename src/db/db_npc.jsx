@@ -5,7 +5,7 @@ const npc = {
         id:'mom',
         name:'Мама',
         ico:Images.npc.mom.ico_mom_present,
-        discription:'Роскошная женщина. Ведет богемный образ жизни и ни в чем себе не отказыват. Любит внимание мужчин и ингда баловать себя сладким. Считает, что пора мне покинуть родительское лоно.',
+        discription:'Моя мама ... что еще нужно?',
         moodOptions:[
             {relationsMin:-30,relationsMax:-20,mood:'rage', text:['#&$& ... (похоже, мне лучше уйти)']},
             {relationsMin:-20,relationsMax:-10,mood:'annoyed', text:['Я не хочу с тобой разговаривать, оставь меня пожалуйста, ...']},
@@ -19,7 +19,7 @@ const npc = {
         id:'principal',
         ico:Images.npc.principal.ico_principal_present,
         name:'Директор колледжа',
-        discription:'Сильная и властная женщина. Судя по фигуре не отказывает себе во внимании мужчин. Что любит и чем увлекается не известно.',
+        discription:'',
         moodOptions:[
             {relationsMin:-30,relationsMax:-10,mood:'rage', text:['#&$& ... (похоже, мне лучше уйти)']},
             {relationsMin:-10,relationsMax:0,mood:'sad', text:['?!']},

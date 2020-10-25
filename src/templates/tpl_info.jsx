@@ -41,11 +41,36 @@ class TabInformation extends React.Component {
 
             <div key={index} className="npcWrapper">
 
-                <p>
-                    <span className="npcName">{stringNpc.npc.name}</span>
-                    <span className="npcChar">Отношения: <span className="npcInfoDiscriptionValue">{stringNpc.relations}</span></span>
-                    <span className="npcChar">Похоть: <span className="npcInfoDiscriptionValue">{stringNpc.corruption}</span></span>
-                </p>
+                <div className="npcInfoRow">
+                    <div className="npcIco">
+                        <img src={stringNpc.npc.ico}/>
+                    </div>
+
+                    <div className="npcInfoShell npcDiscription">
+                        <p>{stringNpc.npc.name}</p>
+                        <p className="npcDiscriptionComment">{stringNpc.npc.discription}</p>
+                    </div>
+
+                    <div className="npcInfoShell npcOptionsShell">
+                        <div className="npcOption">
+                            <p className="npc-options-header npc-option-name">Отношения: </p>
+                            <img src={Images.ico.relations} className="npc-options-ico"/>
+                            <div className="npc-options-value">{stringNpc.relations}</div>
+                        </div>
+                        <div className="npcOption">
+                            <p className="npc-options-header">Похоть: </p>
+                            <img src={Images.ico.corruption} className="npc-options-ico"/>
+                            <div className="npc-options-value">{stringNpc.corruption}</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {/*<p>*/}
+                    {/*<span className="npcName">{stringNpc.npc.name}</span>*/}
+                    {/*<span className="npcChar">Отношения: <span className="npcInfoDiscriptionValue">{stringNpc.relations}</span></span>*/}
+                    {/*<span className="npcChar">Похоть: <span className="npcInfoDiscriptionValue">{stringNpc.corruption}</span></span>*/}
+                {/*</p>*/}
 
                 {/*<div className="npcIco">*/}
                     {/*<img src={stringNpc.npc.ico}/>*/}
@@ -111,86 +136,11 @@ class TabInformation extends React.Component {
                 <div className={npcVision+' info'}>
                     <p className={npcVision+' tabHeader'}>Персонажи</p>
                     {listNpc}
-
-                    <div className="npcInfoRow">
-                        <div className="npcIco">
-                            <img src={Images.npc.mom.ico_mom_present}/>
-                        </div>
-
-                        <div className="npcInfoShell npcDiscription">
-                            <p>Мама</p>
-                            <p className="npcDiscriptionComment">Описание или комментарий, если нужно ... </p>
-                        </div>
-
-                        <div className="npcInfoShell npcOptionsShell">
-                            <div className="npcOption">
-                                <p className="npc-options-header npc-option-name">Отношения</p>
-                                <img src={Images.ico.relations} className="npc-options-ico"/>
-                                <div className="npc-options-value">{1}</div>
-                            </div>
-                            <div className="npcOption">
-                                <p className="npc-options-header">Отношения</p>
-                                <img src={Images.ico.relations} className="npc-options-ico"/>
-                                <div className="npc-options-value">{1}</div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
 
                 <div className={recipesVision+' info'}>
                     <p className={recipesVision+' tabHeader'}>Доступные рецепты</p>
-
                     {listRecipes}
-
-                    {/*<div className="recipeResultShell">*/}
-                        {/*<div className="recipeItem">*/}
-                            {/*<img src={Images.items.food.cake}/>*/}
-                            {/*<span className="recipeNumberOfItems">{10}</span>*/}
-                        {/*</div>*/}
-                        {/*<div className="recipeItem">*/}
-                            {/*<img src={Images.items.food.cake}/>*/}
-                            {/*<span className="recipeNumberOfItems">{10}</span>*/}
-                        {/*</div>*/}
-                        {/*<div className="recipeItem">*/}
-                            {/*<img src={Images.items.food.cake}/>*/}
-                            {/*<span className="recipeNumberOfItems">{10}</span>*/}
-                        {/*</div>*/}
-
-                    {/*</div>*/}
-
-                    {/*<div className="recipeItemShell recipeItemDiscription-width">*/}
-                        {/*<p>Наименование комплекта</p>*/}
-                        {/*<p className="recipeItemDiscription">Тут есть какое то афигенно большое описание комплекта и его свойств. Бла бла бла ...</p>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="recipeItemShell effects-width">*/}
-                        {/*<p>Эффекты</p>*/}
-                        {/*<div className="component">*/}
-                            {/*<div className="componen-img"><img src={Images.items.food.apple}/></div>*/}
-                            {/*<div className={'increase' =='increase'?'component-value-plus':'component-value-minus'}>{'increase' == 'increase'?'+':'-'}{1}</div>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="recipeItemShell">*/}
-                        {/*<p>Ингридиенты</p>*/}
-                        {/*<div className="ingrItem">*/}
-                            {/*<img src={Images.items.food.egg}/>*/}
-                            {/*<span className="recipeNumberOfItems">{2}</span>*/}
-                        {/*</div>*/}
-                        {/*<div className="ingrItem">*/}
-                            {/*<img src={Images.items.food.egg}/>*/}
-                            {/*<span className="recipeNumberOfItems">{3}</span>*/}
-                        {/*</div>*/}
-                        {/*<div className="ingrItem">*/}
-                            {/*<img src={Images.items.food.egg}/>*/}
-                            {/*<span className="recipeNumberOfItems">{2}</span>*/}
-                        {/*</div>*/}
-                        {/*<div className="ingrItem">*/}
-                            {/*<img src={Images.items.food.egg}/>*/}
-                            {/*<span className="recipeNumberOfItems">{1}</span>*/}
-                        {/*</div>*/}
-                    {/*</div>*/}
                 </div>
 
                 <div className={infoVision+' info'}>

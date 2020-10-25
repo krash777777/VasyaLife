@@ -5,6 +5,40 @@ import Images from '../db/db_img.jsx';
 import templates from '../db/db_templates.jsx';
 import {findeValueOnTheArray} from "../modules/service.jsx";
 
+function getIngrBalance(item, props) {
+    let playerStore = props.globalData.Player.playerStore.items;
+    let itemIndex = findeValueOnTheArray(item.id, playerStore, 'arrayItemId');
+
+    let itemQuantityOnTheSlot = findeItemQuantityOnTheSlot(props.globalData, item);
+
+    let itemQuantityPlayerStore = 0;
+    if (itemIndex!==-1) {
+
+        itemQuantityPlayerStore = playerStore[itemIndex].quantity;
+    }
+
+    return itemQuantityOnTheSlot+itemQuantityPlayerStore;
+}
+
+function findeItemQuantityOnTheSlot(globalData, item) {
+
+    let locationCraft = globalData.WorldSettings.worldItemStorage[globalData.General.location.id+'Craft'];
+
+    //найдем количество ингридиента в слоте найденного ингридиента
+    var itemQuantityOnTheSlot = 0;
+    var currentSlot = '';
+    for (var slotNumber=1; slotNumber<5; slotNumber++){
+        currentSlot = 'slot'+slotNumber;
+        if (locationCraft[currentSlot].length>0){
+            if (locationCraft[currentSlot][0].item.id == item.id){
+                itemQuantityOnTheSlot = locationCraft['slot'+slotNumber][0].quantity;
+            }
+        }
+    }
+
+    return itemQuantityOnTheSlot;
+}
+
 function InfoBox(props) {
 
     let thisState = props.thisState;
@@ -16,8 +50,20 @@ function InfoBox(props) {
         var styleInfoBox = 'block';
     }
 
+    let listRecipeWithBalance = props.globalData.Player.recipesAccess;
 
-    const listOfRecipes = props.globalData.Player.recipesAccess.map((arrRecipes, index)=>
+    for(var i = 0; i < listRecipeWithBalance.length; i++) {
+
+        var ingrConsistWithBalance = listRecipeWithBalance[i].recipe.consist;
+        for(var a = 0; a < ingrConsistWithBalance.length; a++) {
+            var currentBalance = getIngrBalance(ingrConsistWithBalance[a].item, props);
+
+            ingrConsistWithBalance[a].balance = currentBalance;
+        }
+    }
+
+    // props.globalData.Player.recipesAccess
+    const listOfRecipes = listRecipeWithBalance.map((arrRecipes, index)=>
 
         <div className='row-recipe' key={index}
              onClick={() => props.choiceRecipe(arrRecipes.recipe.consist)}
@@ -25,9 +71,15 @@ function InfoBox(props) {
 
             <div className='row-ingr'>
                 {arrRecipes.recipe.consist.map((ingr, recipeIndex) =>
-                    <div className='ingr-box ingr-box-right' key={recipeIndex}>
+                    <div className={ingr.balance<ingr.quantity?'ingr-box ingr-box-right markRed':'ingr-box ingr-box-right'}  key={recipeIndex}>
                         <img src={ingr.item.image}/>
-                        <span className="numberOfItems">{ingr.quantity}</span>
+
+                        <div className="numberOfItemsShell">
+                            <span className={ingr.balance<ingr.quantity?'textColorRed':''}>{ingr.balance}</span>
+                            <span>/</span>
+                            <span>{ingr.quantity}</span>
+                        </div>
+                        {/*<span className="numberOfItems">{ingr.balance+'/'+ingr.quantity}</span>*/}
                     </div>
                 )}
             </div>
@@ -135,18 +187,20 @@ class Craft extends React.Component {
             //console.log(arrRecipeConsist[i].item.name+' - '+indexItem);
 
             //найдем количество ингридиента в слоте найденного ингридиента
-            var itemQuantityOnTheSlot = 0;
-            var currentSlot = '';
-            for (var slotNumber=1; slotNumber<5; slotNumber++){
-                currentSlot = 'slot'+slotNumber;
-                if (locationCraft[currentSlot].length>0){
-                    //console.log(locationCraft['slot'+slotNumber][0].item.id+' = '+arrRecipeConsist[i].item.id);
+            let itemQuantityOnTheSlot = findeItemQuantityOnTheSlot(this.props.data, arrRecipeConsistSort[i].item);
 
-                    if (locationCraft[currentSlot][0].item.id == arrRecipeConsistSort[i].item.id){
-                        itemQuantityOnTheSlot = locationCraft['slot'+slotNumber][0].quantity;
-                    }
-                }
-            }
+            // var itemQuantityOnTheSlot = 0;
+            // var currentSlot = '';
+            // for (var slotNumber=1; slotNumber<5; slotNumber++){
+            //     currentSlot = 'slot'+slotNumber;
+            //     if (locationCraft[currentSlot].length>0){
+            //         //console.log(locationCraft['slot'+slotNumber][0].item.id+' = '+arrRecipeConsist[i].item.id);
+            //
+            //         if (locationCraft[currentSlot][0].item.id == arrRecipeConsistSort[i].item.id){
+            //             itemQuantityOnTheSlot = locationCraft['slot'+slotNumber][0].quantity;
+            //         }
+            //     }
+            // }
 
 
             if(indexItem!==-1){

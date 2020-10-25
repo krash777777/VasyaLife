@@ -162,7 +162,7 @@ const Images = {
         },
         principal:{
             external_blueBluse_sittingOnTheTable:'content/npc/principal/principal_ico_01.png',
-            ico_principal_present:'content/npc/principal/ico_principal_present.png',
+            ico_principal_present:'content/npc/principal/blueShirt/interiorSad.png',
 
             principal_img01:'content/npc/principal/principal_img01.png',
             principal_img02:'content/npc/principal/principal_img02.png',
