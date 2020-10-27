@@ -1,7 +1,9 @@
-/*@font-face {*/
-    /*font-family: 'digital'; !* Имя шрифта *!*/
+@font-face {
+    font-family: 'digital'; /* Имя шрифта */
+
+    /*src: url(fonts/DS-DIGI.TTF);*/
     /*src: url("../styles/fonts/DS-DIGI.TTF"); !* Путь к файлу со шрифтом *!*/
-/*}*/
+}
 
 .time{
     width:3vw;
