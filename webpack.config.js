@@ -9,11 +9,27 @@ module.exports = {
 
     module: {
 
-        loaders:[
-
-            { test: /\.(eot|svg|ttf|woff|woff2)$/, loader: 'file?name=[name].[ext]'},
-
-        ],
+        // loaders:[
+        //
+        //     // { test: /\.(eot|svg|ttf|woff|woff2)$/, loader: 'file?name=[name].[ext]'},
+        //
+        //     {
+        //         test: /\.scss$/,
+        //         loader: 'style-loader!css-loader!sass-loader'
+        //     },
+        //
+        //     { test: /\.(eot|svg|ttf|woff|woff2)$/,
+        //         use: [
+        //             {
+        //                 loader: 'file-loader',
+        //                 options: {
+        //                     name: '[name].[ext]',
+        //                     outputPath: 'fonts/'
+        //                 }
+        //             }
+        //         ]
+        //     },
+        // ],
 
         rules: [
             {
