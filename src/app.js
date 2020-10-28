@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 
+import './styles/fonts/DS-DIGI.TTF';
+
 import {changeGameStates_fromScene, changeClothes} from './modules/options.jsx';
 
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './modules/events.jsx';
