@@ -185,7 +185,9 @@ img{
     margin: 0.5vw 0.5vw 0 0.5vw;
     border-radius: 0.33vw;
     background-color: linen;
-    border: solid 1px #F2F886;
+    /*border: solid 1px #F2F886;*/
+    border-top: solid 1px #ccd2d5;
+    border-bottom: solid 1px #ccd2d5;
     position: relative;
 }
 
@@ -216,9 +218,11 @@ img{
 .info-box-effects{
     height: 3.4vw;
     width: 100%;
-    background-color: #ECFC71;
+    /*background-color: #ECFC71;*/
+    background-color: #E5E8EA;
+    border-top: solid 1px #ccd2d5;
     float: left;
-    margin-top: 0.5vw;
+    margin-top: 1vw;
     color: #5D016D;
 }
 
@@ -255,10 +259,10 @@ img{
 }
 
 .info-box-button{
-    background-color: #FFFC96;
-    border: 1px solid #FFFDB2;
-    color: #A6A225;
-    border-radius: 0.25vw;
+    background-color: #FFFCF4;
+    border: 1px solid #BFBDB9;
+    color: #A6614F;
+    border-radius: 0.2vw;
     float: right;
     margin: 0.8vw 1vw 0 0;
     min-width: 5vw;
@@ -267,9 +271,9 @@ img{
 
 .info-box-button:hover{
     cursor: pointer;
-    background-color: #FFFB73;
-    border: 1px solid #BFBC30;
-    color: #00685A;
+    background-color: #FFF6F4;
+    border: 1px solid #D39180;
+    color: #6C2B1A;
     float: right;
 }
 
