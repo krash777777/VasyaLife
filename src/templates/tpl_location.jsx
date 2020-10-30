@@ -87,6 +87,21 @@ class Location extends React.Component {
         this.props.changeStates('relax', {interval:interval});
     }
 
+    getSkyOpasity(hour){
+        if (hour>=0&&hour<=2){return 1}
+        if (hour>2&&hour<=4){return 0.9}
+        if (hour>4&&hour<=6){return 0.6}
+        if (hour>6&&hour<=8){return 0.5}
+        if (hour>8&&hour<=10){return 0.4}
+        if (hour>10&&hour<=12){return 0.3}
+        if (hour>12&&hour<=14){return 0.2}
+        if (hour>14&&hour<=16){return 0.3}
+        if (hour>16&&hour<=18){return 0.4}
+        if (hour>18&&hour<=20){return 0.5}
+        if (hour>20&&hour<=22){return 0.6}
+        if (hour>22){return 0.8}
+    }
+
     render() {
         const location = this.props.data.General.location;
         const Time = parseTimeData(this.props.data.General.dateAndTime.time);
@@ -95,6 +110,7 @@ class Location extends React.Component {
         let minutes = <CountUp start={Time.minutes<10 ? 0 : Time.minutes-10} end={Time.minutes} duration={1} />;
 
         //console.log(Time.hours);
+
         let classBoxShadowNight = getClassBoxShadow(Time.hours);
 
 
@@ -199,8 +215,14 @@ class Location extends React.Component {
             </div>
         );
 
+
+        let skyGradient = 'sky-gradient-'+Time.prefixH+Time.hours;
+        let skyOpacity = this.getSkyOpasity(Time.hours);
+
         return (
             <div id="background">
+
+                <div className={skyGradient+' centered'} style={{opacity:skyOpacity}}></div>
 
                 {/*stretchHorizontally*/}
                 {/*zoomIn*/}
@@ -209,7 +231,7 @@ class Location extends React.Component {
                 {/*blur*/}
 
                 <CSSTransitionGroup
-                    transitionName={animations.zoomIn}
+                    transitionName={animations.transparency}
                     transitionAppear={true} transitionAppearTimeout={500}
                     transitionEnter={true} transitionEnterTimeout={500}
                     transitionLeave={false} transitionLeaveTimeout={500}
@@ -227,28 +249,6 @@ class Location extends React.Component {
                                 <a style={{display:location.panelsVision.time}} className="time" onClick={() => this.relax(30)}>{Time.prefixH}{hours}<span className="anima-sec">:</span>{Time.prefixM}{minutes}</a>
 
                                 <HeaderPanelOptions thisData={this.props.data} changeTpl={() => this.props.changeStates('changeTpl', {tpl:templates.playerOptionsInfo})} />
-
-                                {/*<div style={{display:location.panelsVision.optionsPanel}} className="options-panel">*/}
-                                    {/*{playerOptions}*/}
-                                {/*</div>*/}
-
-                                {/*<div style={{display:location.panelsVision.optionsPanel}} className="modifires">*/}
-                                    {/*{playerOptionsModifiers}*/}
-
-                                    {/*<div className="ico-modifires-wrapper">*/}
-                                        {/*<img src={Images.ico.poison} title={'Истощение. Осталось 11 дней.'} className="img_background"/>*/}
-                                        {/*<a className="characteristic-value textDecoration-lowLevel">24h</a>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="ico-modifires-wrapper">*/}
-                                        {/*<img src={Images.ico.dispenser} className="img_background"/>*/}
-                                        {/*<a className="characteristic-value textDecoration-averageLevel">25</a>*/}
-                                    {/*</div>*/}
-                                    {/*<div className="ico-modifires-wrapper">*/}
-                                        {/*<img src={Images.ico.health} className="img_background"/>*/}
-                                        {/*<a className="characteristic-value textDecoration-averageLevel">45</a>*/}
-                                    {/*</div>*/}
-                                {/*</div>*/}
-
 
                             </div>
 
@@ -269,6 +269,7 @@ class Location extends React.Component {
                     </div>
 
                 </CSSTransitionGroup>
+
             </div>
         )
     }

@@ -281,10 +281,12 @@ class Inventory extends React.Component {
                                             <img src={Images.ico.hanger} className="tabButtonImg"/>
                                             <a className="tabButtonText">Одежда</a>
                                         </div>
-                                        <div style={tabStyle.magic.tabButton} className="tabButton" onClick={() => this.changeTabFocus('magic')}>
-                                            <img src={Images.ico.energyYellow} className="tabButtonImg"/>
-                                            <a className="tabButtonText">Магия</a>
-                                        </div>
+
+                                        {/*<div style={tabStyle.magic.tabButton} className="tabButton" onClick={() => this.changeTabFocus('magic')}>*/}
+                                            {/*<img src={Images.ico.energyYellow} className="tabButtonImg"/>*/}
+                                            {/*<a className="tabButtonText">Магия</a>*/}
+                                        {/*</div>*/}
+
                                     </div>
 
                                     <div style={tabStyle.items.tabPanel} className="tabPanel items">
@@ -296,7 +298,8 @@ class Inventory extends React.Component {
                                     </div>
 
                                     <div style={tabStyle.clothing.tabPanel} className="tabPanel clothing">{listOfClothing}</div>
-                                    <div style={tabStyle.magic.tabPanel} className="tabPanel magic"></div>
+
+                                    {/*<div style={tabStyle.magic.tabPanel} className="tabPanel magic"></div>*/}
                                 </div>
                             </div>
                         </CSSTransitionGroup>

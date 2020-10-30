@@ -327,6 +327,13 @@
     animation: transparency 1000ms;
 }
 
+.blurBlinkAnimation{
+    /*animation: blur 1s ease-in infinite;*/
+    animation: blur 1s linear infinite;
+    /*-webkit-animation: blur 1s linear infinite;*/
+    /*animation: blur 100ms linear;*/
+}
+
 @keyframes blur{
     from, to {
         opacity: 1;
@@ -341,11 +348,6 @@
         opacity: 1;
         filter: blur(0vw);
     }
-}
-
-.blurBlinkAnimation{
-    animation: blur 3s ease-in infinite;
-    /*animation: blur 100ms linear;*/
 }
 
 @keyframes shakeVertical{
