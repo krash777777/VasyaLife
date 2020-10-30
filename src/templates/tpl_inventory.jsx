@@ -38,7 +38,9 @@ function ItemInteractions(props) {
     );
     let effects = instantEffects.length>0?(
         <div className="info-box-effects-instantEffects">
-            {/*<div className="info-box-effects-components-name"><a>Мгновенное действие</a></div>*/}
+
+            <div className="info-box-effects-components-name"><a>Мгновенное действие:</a></div>
+
             <div className="info-box-effects-components">
                 {instantEffects}
                 <div style={{clear:'both'}}></div>
@@ -55,7 +57,9 @@ function ItemInteractions(props) {
     );
     let modifiers = listModifiers.length>0?(
             <div className="info-box-effects-instantEffects">
-                {/*<div className="info-box-effects-components-name"><a>Модификаторы</a></div>*/}
+
+                <div className="info-box-effects-components-name"><a>Изменение модификаторов:</a></div>
+
                 <div className="info-box-effects-components">
                     {listModifiers}
                     <div style={{clear:'both'}}></div>
@@ -73,7 +77,7 @@ function ItemInteractions(props) {
     );
     let replacementItems = listReplacementItems.length>0?(
         <div className="info-box-effects-instantEffects">
-            {/*<div className="info-box-effects-components-name"><a>Модификаторы</a></div>*/}
+            <div className="info-box-effects-components-name"><a>Предметы в инвентаре:</a></div>
             <div className="info-box-effects-components">
                 {listReplacementItems}
                 <div style={{clear:'both'}}></div>

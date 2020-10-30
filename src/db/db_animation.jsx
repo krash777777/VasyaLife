@@ -1,4 +1,5 @@
 const animations = {
+
     zoomIn:'zoomIn',
     transparency:'transparency',
     blurBlinkAnimation:'blurBlinkAnimation',

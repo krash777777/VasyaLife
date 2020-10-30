@@ -4,7 +4,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 
 import './styles/fonts/DS-DIGI.TTF';
 
-import {changeGameStates_fromScene, changeClothes} from './modules/options.jsx';
+import {changeGameStates_fromScene, changeClothes, findeSlot} from './modules/options.jsx';
 
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './modules/events.jsx';
 import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions, craft} from './modules/service.jsx';
@@ -80,32 +80,32 @@ class Game extends React.Component {
         }
     }
 
-    findeSlot(worldItemSorage, item){
-
-        //ищем слот, заполненный нашим предметом, если не находим, возвращаем пустой слот
-        if(worldItemSorage.slot1.length !== 0){
-            if(worldItemSorage.slot1[0].item.id == item.id){return {type:'increment',slot:'slot1'}}
-        }
-        if(worldItemSorage.slot2.length !== 0) {
-            if (worldItemSorage.slot2[0].item.id == item.id) {return {type:'increment',slot:'slot2'}}
-        }
-        if(worldItemSorage.slot3.length !== 0) {
-            if (worldItemSorage.slot3[0].item.id == item.id) {return {type:'increment',slot:'slot3'}}
-        }
-        if(worldItemSorage.slot4.length !== 0) {
-            if (worldItemSorage.slot4[0].item.id == item.id) {return {type:'increment',slot:'slot4'}}
-        }
-
-        //ищем пустой
-        if(worldItemSorage.slot1.length == 0){return {type:'add',slot:'slot1'}}
-        if(worldItemSorage.slot2.length == 0){return {type:'add',slot:'slot2'}}
-        if(worldItemSorage.slot3.length == 0){return {type:'add',slot:'slot3'}}
-        if(worldItemSorage.slot4.length == 0){return {type:'add',slot:'slot4'}}
-        else{
-            alert('Все слоты заняты!');
-            return -1; // в том случае, если все слоты заняты
-        }
-    }
+    // findeSlot(worldItemSorage, item){
+    //
+    //     //ищем слот, заполненный нашим предметом, если не находим, возвращаем пустой слот
+    //     if(worldItemSorage.slot1.length !== 0){
+    //         if(worldItemSorage.slot1[0].item.id == item.id){return {type:'increment',slot:'slot1'}}
+    //     }
+    //     if(worldItemSorage.slot2.length !== 0) {
+    //         if (worldItemSorage.slot2[0].item.id == item.id) {return {type:'increment',slot:'slot2'}}
+    //     }
+    //     if(worldItemSorage.slot3.length !== 0) {
+    //         if (worldItemSorage.slot3[0].item.id == item.id) {return {type:'increment',slot:'slot3'}}
+    //     }
+    //     if(worldItemSorage.slot4.length !== 0) {
+    //         if (worldItemSorage.slot4[0].item.id == item.id) {return {type:'increment',slot:'slot4'}}
+    //     }
+    //
+    //     //ищем пустой
+    //     if(worldItemSorage.slot1.length == 0){return {type:'add',slot:'slot1'}}
+    //     if(worldItemSorage.slot2.length == 0){return {type:'add',slot:'slot2'}}
+    //     if(worldItemSorage.slot3.length == 0){return {type:'add',slot:'slot3'}}
+    //     if(worldItemSorage.slot4.length == 0){return {type:'add',slot:'slot4'}}
+    //     else{
+    //         alert('Все слоты заняты!');
+    //         return -1; // в том случае, если все слоты заняты
+    //     }
+    // }
 
     changeStates(command, options){
         var gameStatus = JSON.parse(localStorage.getItem("VL"));
@@ -197,7 +197,9 @@ class Game extends React.Component {
             gameStatus.General.action = options.action;
 
         }if (command == 'changeNpcInLocation'){
+
             gameStatus.General.npcInLocation = options.arrNpc;
+
         }if (command == 'moveItems'){
 
             if (options.source == 'playerItems'){
@@ -224,7 +226,10 @@ class Game extends React.Component {
             if (options.moveType == 'playerStorage->slot'){
 
                 let item = playerStorage[options.index].item;
-                let arrSlot = this.findeSlot(worldItemSorage, item);
+
+                // let arrSlot = this.findeSlot(worldItemSorage, item); // старый вариант
+
+                let arrSlot = findeSlot(worldItemSorage, item);
 
                 //добавим предмет в слот
                 var slot = worldItemSorage[arrSlot.slot];

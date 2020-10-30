@@ -10,6 +10,8 @@ import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions} fr
 import ScenesGeneral from '../db/db_scenesGeneral.jsx';
 import Images from '../db/db_img.jsx';
 import templates from '../db/db_templates.jsx';
+import animations from '../db/db_animation.jsx';
+
 
 import {HeaderPanelOptions} from './tpl_interfaceParts.jsx';
 
@@ -147,8 +149,6 @@ class Location extends React.Component {
         // );
 
         const listInstantActions = location.instantAction.map((ia, index) =>
-
-
             <div
                 className="actionRoom"
                 key={index}
@@ -201,10 +201,15 @@ class Location extends React.Component {
 
         return (
             <div id="background">
+
                 {/*stretchHorizontally*/}
                 {/*zoomIn*/}
+                {/*stretchZ*/}
+                {/*blurBlinkAnimation*/}
+                {/*blur*/}
+
                 <CSSTransitionGroup
-                    transitionName="stretchZ"
+                    transitionName={animations.zoomIn}
                     transitionAppear={true} transitionAppearTimeout={500}
                     transitionEnter={true} transitionEnterTimeout={500}
                     transitionLeave={false} transitionLeaveTimeout={500}
@@ -212,7 +217,9 @@ class Location extends React.Component {
 
                     <div className="game_container centered container_layer txt-no-select">
                         <div className="centered container_layer">
+
                             {/*classBoxShadowNight*/}
+
                             <img src={location.img} className="img_background"/>
                         </div>
                         <div className={classBoxShadowNight+" centered container_layer"}>

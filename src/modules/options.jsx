@@ -527,4 +527,31 @@ function checkClothingSet(arrItemsOnTheBody) {
     return -1;
 }
 
-export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes};
+function  findeSlot(worldItemStorage, item){
+
+    //ищем слот, заполненный нашим предметом, если не находим, возвращаем пустой слот
+    if(worldItemStorage.slot1.length !== 0){
+        if(worldItemStorage.slot1[0].item.id == item.id){return {type:'increment',slot:'slot1'}}
+    }
+    if(worldItemStorage.slot2.length !== 0) {
+        if (worldItemStorage.slot2[0].item.id == item.id) {return {type:'increment',slot:'slot2'}}
+    }
+    if(worldItemStorage.slot3.length !== 0) {
+        if (worldItemStorage.slot3[0].item.id == item.id) {return {type:'increment',slot:'slot3'}}
+    }
+    if(worldItemStorage.slot4.length !== 0) {
+        if (worldItemStorage.slot4[0].item.id == item.id) {return {type:'increment',slot:'slot4'}}
+    }
+
+    //ищем пустой
+    if(worldItemStorage.slot1.length == 0){return {type:'add',slot:'slot1'}}
+    if(worldItemStorage.slot2.length == 0){return {type:'add',slot:'slot2'}}
+    if(worldItemStorage.slot3.length == 0){return {type:'add',slot:'slot3'}}
+    if(worldItemStorage.slot4.length == 0){return {type:'add',slot:'slot4'}}
+    else{
+        alert('Все слоты заняты!');
+        return -1; // в том случае, если все слоты заняты
+    }
+}
+
+export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes, findeSlot};
