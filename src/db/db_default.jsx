@@ -98,6 +98,7 @@ const defaultValues = {
         ],
         GameMarks:{
             quests:[],
+            dailyMarks:[],
         }
     }
 }

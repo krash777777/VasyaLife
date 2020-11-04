@@ -3,7 +3,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import CountUp from 'react-countup';
 
 
-import {changeTime,parseTimeData} from '../modules/options.jsx';
+import {changeTime,parseTimeData, getSkyOpasity} from '../modules/options.jsx';
 import {findeNpcInLocation} from '../modules/npc.jsx';
 import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions} from '../modules/service.jsx';
 
@@ -121,8 +121,11 @@ class Location extends React.Component {
                 style={{top:transition.indentationTop, left:transition.indentationLeft}}
                 onClick={() => this.goToLocation(transition)}
             >
-            <img className="icoTransition" src={transition.img}/>
+
+                <img className="icoTransition" src={transition.img}/>
+
                 <a className="textTransition">{transition.name}</a>
+
             </div>
         );
 
@@ -217,7 +220,7 @@ class Location extends React.Component {
 
 
         let skyGradient = 'sky-gradient-'+Time.prefixH+Time.hours;
-        let skyOpacity = this.getSkyOpasity(Time.hours);
+        let skyOpacity = getSkyOpasity(Time.hours);
 
         return (
             <div id="background">

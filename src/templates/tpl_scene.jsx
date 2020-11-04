@@ -3,6 +3,8 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import Typist from 'react-typist';
 import CountUp from 'react-countup';
 import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions} from '../modules/service.jsx';
+import {changeTime,parseTimeData, getSkyOpasity} from '../modules/options.jsx';
+
 
 import Images from '../db/db_img.jsx';
 
@@ -309,7 +311,10 @@ function Transitions(props) {
         //var availableTransitions = getAvailableTransitions(transitions, props.npcRelations);
 
         let listTransitions = availableTransitions.map((transition, index) =>
-            <li key={index} onClick={() => props.makeTransition(transition.address, props.scene)}>{transition.text}</li>
+            <li key={index} onClick={() => props.makeTransition(transition.address, props.scene)}>
+                <img className="icoTransitionText" src={Images.ico.map}/>
+                {transition.text}
+            </li>
         );
 
         if (listTransitions.length>0){
@@ -421,7 +426,9 @@ class Scene extends React.Component {
     }
 
     makeTransition(transition, scene){
+
         let options = [];
+
         if (transition == 'end') {
 
             this.props.changeStates('sceneIsOver', options);
@@ -460,6 +467,12 @@ class Scene extends React.Component {
         let arrInteraction = this.props.data.General.action[this.state.block];
         let npcRelations = getNpcRelations(arrInteraction.npc, this.props.data.Npc);
 
+
+        let Time = parseTimeData(this.props.data.General.dateAndTime.time);
+
+        let skyGradient = 'sky-gradient-'+Time.prefixH+Time.hours;
+        let skyOpacity = getSkyOpasity(Time.hours);
+
         //console.log(arrInteraction);
 
         const classLayerDefoult = "game_container centered container_layer txt-no-select transparencyAnimation1s";
@@ -467,7 +480,11 @@ class Scene extends React.Component {
 
         return (
             <div id="background">
+
+                <div className={skyGradient+' centered'} style={{opacity:skyOpacity}}></div>
+
                 <div className={layerClass}>
+
                     <div className="centered container_layer">
                         <img src={arrInteraction.img_background==''?this.props.data.General.location.img:arrInteraction.img_background} className="img_background"/>
                     </div>
@@ -494,8 +511,8 @@ class Scene extends React.Component {
 
                     {/*</div>*/}
 
-
                     {/*<SceneTemplate data={scene} block={this.state.block} makeTransition={(transition, scene) => this.makeTransition(transition, scene)} />*/}
+
                 </div>
             </div>
         )

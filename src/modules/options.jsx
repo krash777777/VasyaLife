@@ -76,9 +76,10 @@ function parseTimeData(time){
 
 function changesInTheGameWorldWhenTheDayChanges(gameStatus) {
 
-    //пока не придумал, как реально буду применять эту процедуру
+    //удаление ежедневных маркеров
+    let arrDailyMarks = gameStatus.GameMarks.dailyMarks;
+    arrDailyMarks.length = 0;
 
-    //alert('change of day');
 
     //предметы в локациях при смене суток
 
@@ -167,22 +168,21 @@ function changeNpcOption(npc, option, type, value, limit, gameStatus) {
     let npcGlobal = gameStatus.Npc;
 
     for(var i = 0; i < npcGlobal.length; i++) {
-
         if (npcGlobal[i].npc.id == npc.id){
             let currentValue = npcGlobal[i][option];
 
             let balance = type == 'increase'?currentValue+value:type == 'decrease'?currentValue-value:value;
 
             if (type == 'increase'){
-                if (balance<=limit){
-                    gameStatus.Npc[i][option] = balance;
-                } if (balance>limit){
-                    gameStatus.Npc[i][option] = limit;
+                if (currentValue>=limit){
+                    gameStatus.Npc[i][option] = currentValue;
+                } else {
+                    if (balance<=limit){gameStatus.Npc[i][option] = balance;}
+                    if (balance>limit){gameStatus.Npc[i][option] = limit;}
                 }
             } else {
                 gameStatus.Npc[i][option] = balance;
             }
-
         }
     }
 
@@ -239,6 +239,7 @@ function changeCharacteristics(optionId, optionIndex, gameStatus) {
 
     }if (optionId == 'lifeEnergy'){
         if (totalValueCharacteristics <= 0){
+
             //жизненные силы закончились ... запускаем сцену завершения игры
             doInstantActions(scenes.death, gameStatus);
         }
@@ -303,6 +304,7 @@ function getAppearance(option, totalValue) {
 function changeGameStates_fromScene(options, gameStatus) {
 
     let arrQuests = gameStatus.GameMarks.quests;
+    let arrDailyMarks = gameStatus.GameMarks.dailyMarks;
 
     for(var i = 0; i < options.length; i++){
         var type = options[i].changeType;
@@ -316,6 +318,20 @@ function changeGameStates_fromScene(options, gameStatus) {
 
             if (questId !== -1){
                 arrQuests.splice(questId,1); // удаляем квест
+            }
+
+        } if (type == 'addDailyMarks'){
+
+            var markId = findeValueOnTheArray(options[i].changeValue.id, arrDailyMarks, 'arrayDailyMarks');
+            if (markId == -1){
+                arrDailyMarks[arrDailyMarks.length]= options[i].changeValue;
+            }
+
+        } if (type == 'deleteDailyMarks'){
+
+            var markId = findeValueOnTheArray(options[i].changeValue.id, arrDailyMarks, 'arrayDailyMarks');
+            if (markId !== -1){
+                arrDailyMarks.splice(markId,1); // удаляем ежедневный маркер
             }
 
         } if (type == 'addModifier'){
@@ -554,4 +570,19 @@ function  findeSlot(worldItemStorage, item){
     }
 }
 
-export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes, findeSlot};
+function getSkyOpasity(hour){
+    if (hour>=0&&hour<=2){return 1}
+    if (hour>2&&hour<=4){return 0.9}
+    if (hour>4&&hour<=6){return 0.6}
+    if (hour>6&&hour<=8){return 0.5}
+    if (hour>8&&hour<=10){return 0.4}
+    if (hour>10&&hour<=12){return 0.3}
+    if (hour>12&&hour<=14){return 0.2}
+    if (hour>14&&hour<=16){return 0.3}
+    if (hour>16&&hour<=18){return 0.4}
+    if (hour>18&&hour<=20){return 0.5}
+    if (hour>20&&hour<=22){return 0.6}
+    if (hour>22){return 0.8}
+}
+
+export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes, findeSlot, getSkyOpasity};

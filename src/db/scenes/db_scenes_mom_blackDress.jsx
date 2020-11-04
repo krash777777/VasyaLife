@@ -6,9 +6,10 @@ import NpcStyles from '../db_npcImageStyle.jsx';
 import Npc from '../db_npc.jsx';
 import playerOptions from '../db_playerOptions.jsx';
 import items from '../db_items.jsx';
+import dailyMarks from '../marks/db_dailyMarks.jsx';
 
 
-//react - значение подсавляется в в картинку нип и диалог - означает то, что НИП должен прореагировать на ГГ в зависимости от слкдающейся ситуации
+//react - значение подсавляется в в картинку нип и диалог - означает то, что НИП должен прореагировать на ГГ в зависимости от слкдвающейся ситуации
 
 const mom_blackDress = {
     block00:{
@@ -42,16 +43,106 @@ const mom_blackDress = {
         change_states:[],
 
         transitions:[
-            {text:'У меня есть для тебя ко что ... ',address:'presents', condition:[]},
-            {text:'Можно мне немного карманных денег?',address:'money',
-                condition:[
-                    {option:'relations', npc:Npc.mom, type:'more',value:4},
-                    {option:'corruption', npc:Npc.mom, type:'more',value:0},
-                ]
-            },
+            {text:'Общаться', address:'chatMomHi', condition:[]},
+            {text:'Флиртовать', address:'chatMomHi', condition:[]},
+            {text:'Особое воздействие', address:'chatMomHi', condition:[]},
+            {text:'Квесты', address:'chatMomHi', condition:[]},
+
+            // {text:'Болтать ... ',address:'chatMomHi',
+            //     condition:[
+            //         {option:'relations', npc:Npc.mom, type:'more',value:-1},
+            //         {option:'relations', npc:Npc.mom, type:'less',value:11},
+            //         {option:'dailyMark', npc:Npc.mom, type:'doesNotExist',value:dailyMarks.chatMomHi},
+            //     ]
+            // },
+            //
+            // {text:'Поделиться новостями ... ',address:'chatMomNews',
+            //     condition:[
+            //         {option:'relations', npc:Npc.mom, type:'more',value:4},
+            //         {option:'relations', npc:Npc.mom, type:'less',value:16},
+            //         {option:'dailyMark', npc:Npc.mom, type:'doesNotExist',value:dailyMarks.chatMomNews},
+            //     ]
+            // },
+            //
+            // {text:'Хочу дать тебе кое что вкусненькое ... ',address:'presents', condition:[]},
+            // {text:'Можно мне немного карманных денег?',address:'money',
+            //     condition:[
+            //         {option:'relations', npc:Npc.mom, type:'more',value:4},
+            //         {option:'corruption', npc:Npc.mom, type:'more',value:0},
+            //     ]
+            // },
+
             {text:'(уйти)',address:'end', condition:[]},
         ],
 
+    },
+
+    //===================================================
+
+    chatMomHi:{
+        type:'conversation',
+
+        npc:Npc.mom,
+        npcStyle:NpcStyles.mom.blackDress,
+        npcImage:NpcStyles.mom.blackDress.interior.goodMood,
+
+        img_background:'',
+        change_states:[
+            {
+                changeType:'changeNpcOptions',
+                changeValue:[
+                    {option:'relations', npc:Npc.mom, type:'increase', limit:5, value:1},
+                ]
+            },
+            {
+                changeType:'changeOptions',
+                changeValue:[
+                    {option:playerOptions.morale, type:'increase', limit:30, value:2}
+                ]
+            },
+            {
+                changeType:'addDailyMarks',changeValue:dailyMarks.chatMomHi,
+            },
+        ],
+
+        iteration_text:[
+            'Мы болтаем о всяких мелочах ... о снах, настроении и прочем ...',
+        ],
+        transitions:['block_main_transitions']
+    },
+
+    //===================================================
+
+    chatMomNews:{
+        type:'conversation',
+
+        npc:Npc.mom,
+        npcStyle:NpcStyles.mom.blackDress,
+        npcImage:NpcStyles.mom.blackDress.interior.goodMood,
+
+        img_background:'',
+        change_states:[
+            {
+                changeType:'changeNpcOptions',
+                changeValue:[
+                    {option:'relations', npc:Npc.mom, type:'increase', limit:10, value:1},
+                ]
+            },
+            {
+                changeType:'changeOptions',
+                changeValue:[
+                    {option:playerOptions.morale, type:'increase', limit:30, value:2}
+                ]
+            },
+            {
+                changeType:'addDailyMarks',changeValue:dailyMarks.chatMomNews,
+            },
+        ],
+
+        iteration_text:[
+            'Мы мило болтаем. Делимся новостями и событиями текущего дня ...',
+        ],
+        transitions:['block_main_transitions']
     },
 
     //===================================================
@@ -152,7 +243,9 @@ const mom_blackDress = {
         ],
         transitions:['block_main_transitions']
     },
+
     //===================================================
+
     presents_cake:{
         type:'conversation',
 

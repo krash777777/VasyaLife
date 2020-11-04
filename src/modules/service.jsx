@@ -6,13 +6,15 @@ import recepies from '../db/db_recepies.jsx';
 function findeValueOnTheArray(id, array, option){
     for(var i = 0; i < array.length; i++) {
 
-        if(option === 'arrayItemId') {if(array[i].item.id === id) {return i}};
-        if(option === 'arrayClothingId') {if(array[i].id === id) {return i}};
-        if(option === 'arrayTypeClothing') {if(array[i].partOfBody === id) {return {index:i, itemOfClothing:array[i]}}}
-        if(option === 'arrayOptionId') {if(array[i].option.id === id) {return i}};
-        if(option === 'arrayModifireId') {if(array[i].modifier.id === id) {return i}};
-        if(option === 'arrayRecipeList') {if(array[i].recipe === id) {return i}};
-        if(option === 'arrayQuest') {if(array[i].id=== id) {return i}};
+        if(option == 'arrayItemId') {if(array[i].item.id === id) {return i}};
+        if(option == 'arrayClothingId') {if(array[i].id === id) {return i}};
+        if(option == 'arrayTypeClothing') {if(array[i].partOfBody === id) {return {index:i, itemOfClothing:array[i]}}}
+        if(option == 'arrayOptionId') {if(array[i].option.id === id) {return i}};
+        if(option == 'arrayModifireId') {if(array[i].modifier.id === id) {return i}};
+        if(option == 'arrayRecipeList') {if(array[i].recipe === id) {return i}};
+        if(option == 'arrayQuest') {if(array[i].id=== id) {return i}};
+        if(option == 'arrayDailyMarks') {if(array[i].id=== id) {return i}};
+
     }
     return -1; //to handle the case where the value doesn't exist
 }
@@ -53,15 +55,17 @@ function checkConditions(conditions, gameStatus) {
             var npcRelations = getNpcRelations(conditions[i].npc, gameStatus.Npc);
 
             if (conditions[i].type == 'more'){if (npcRelations.relations > conditions[i].value){conditionCount++}}
-            if (conditions[i].type == 'equally'){if (npcRelations.relations < conditions[i].value){conditionCount++}}
+            if (conditions[i].type == 'less'){if (npcRelations.relations < conditions[i].value){conditionCount++}}
             if (conditions[i].type == 'equally'){if (npcRelations.relations = conditions[i].value){conditionCount++}}
+
+            // console.log(npcRelations.relations+' - '+conditions[i].type+' - '+conditions[i].value);
         }
 
         if (conditions[i].option == 'corruption'){
             var npcRelations = getNpcRelations(conditions[i].npc, gameStatus.Npc);
 
             if (conditions[i].type == 'more'){if (npcRelations.corruption > conditions[i].value){conditionCount++}}
-            if (conditions[i].type == 'equally'){if (npcRelations.corruption < conditions[i].value){conditionCount++}}
+            if (conditions[i].type == 'less'){if (npcRelations.corruption < conditions[i].value){conditionCount++}}
             if (conditions[i].type == 'equally'){if (npcRelations.corruption = conditions[i].value){conditionCount++}}
         }
 
@@ -93,9 +97,26 @@ function checkConditions(conditions, gameStatus) {
             }
         }
 
+        if (conditions[i].option == 'dailyMark'){
+
+            let arrDailyMarks = gameStatus.GameMarks.dailyMarks;
+            var markId = findeValueOnTheArray(conditions[i].value.id, arrDailyMarks, 'arrayDailyMarks');
+
+            //console.log(conditions[i].value.id+' - '+conditions[i].type+' - '+markId);
+
+            if(conditions[i].type == 'exist'){
+                if (markId !== -1){conditionCount++}
+            }if(conditions[i].type == 'doesNotExist'){
+                if (markId == -1){conditionCount++}
+            }
+        }
+
+        // console.log(conditions[i].option + ' - '+conditionCount);
     }
 
-    if (conditions.length === conditionCount){
+
+
+    if (conditions.length == conditionCount){
         return 'success';
     }
 
