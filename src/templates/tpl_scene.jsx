@@ -312,7 +312,7 @@ function Transitions(props) {
 
         let listTransitions = availableTransitions.map((transition, index) =>
             <li key={index} onClick={() => props.makeTransition(transition.address, props.scene)}>
-                <img className="icoTransitionText" src={Images.ico.map}/>
+                {/*<img className="icoTransitionText" src={Images.ico.map}/>*/}
                 {transition.text}
             </li>
         );
