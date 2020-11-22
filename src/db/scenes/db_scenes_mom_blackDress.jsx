@@ -43,8 +43,10 @@ const mom_blackDress = {
         change_states:[],
 
         transitions:[
-            {text:'Общаться', address:'chatMomHi', condition:[]},
-            {text:'Флиртовать', address:'chatMomHi', condition:[]},
+
+            {text:'Общаться', address:'transitions_chat', condition:[]},
+            // {text:'Общаться 2', address:'transitions_chat', condition:[]},
+            {text:'Флиртовать', address:'transitions_flirt', condition:[]},
             {text:'Особое воздействие', address:'chatMomHi', condition:[]},
             {text:'Квесты', address:'chatMomHi', condition:[]},
 
@@ -73,6 +75,46 @@ const mom_blackDress = {
             // },
 
             {text:'(уйти)',address:'end', condition:[]},
+        ],
+
+    },
+    //===================================================
+
+    transitions_chat:{
+        type:'transitions',
+
+        npc:Npc.mom,
+        npcStyle:NpcStyles.mom.blackDress,
+        npcImage:'react',
+
+        img_background:'',
+        change_states:[],
+
+        transitions:[
+            {text:'Болтать ... ',address:'chatMomHi',
+                condition:[
+                    {option:'relations', npc:Npc.mom, type:'more',value:-1},
+                    {option:'relations', npc:Npc.mom, type:'less',value:11},
+                    {option:'dailyMark', npc:Npc.mom, type:'doesNotExist',value:dailyMarks.chatMomHi},
+                ]
+            },
+
+            // {text:'Болтать ... ',address:'chatMomHi_badReaction',
+            //     condition:[
+            //         {option:'relations', npc:Npc.mom, type:'more',value:-1},
+            //         {option:'relations', npc:Npc.mom, type:'less',value:11},
+            //         {option:'dailyMark', npc:Npc.mom, type:'exist',value:dailyMarks.chatMomHi},
+            //     ]
+            // },
+
+            {text:'Поделиться новостями ... ',address:'chatMomNews',
+                condition:[
+                    {option:'relations', npc:Npc.mom, type:'more',value:4},
+                    {option:'relations', npc:Npc.mom, type:'less',value:16},
+                    {option:'dailyMark', npc:Npc.mom, type:'doesNotExist',value:dailyMarks.chatMomNews},
+                ]
+            },
+            {text:'(назад)',address:'block_main_transitions', condition:[]},
         ],
 
     },
@@ -107,6 +149,29 @@ const mom_blackDress = {
 
         iteration_text:[
             'Мы болтаем о всяких мелочах ... о снах, настроении и прочем ...',
+        ],
+        transitions:['block_main_transitions']
+    },
+
+    chatMomHi_badReaction:{
+        type:'conversation',
+
+        npc:Npc.mom,
+        npcStyle:NpcStyles.mom.blackDress,
+        npcImage:NpcStyles.mom.blackDress.interior.sad,
+
+        img_background:'',
+        change_states:[
+            {
+                changeType:'changeOptions',
+                changeValue:[
+                    {option:playerOptions.morale, type:'decrease', limit:0, value:1}
+                ]
+            },
+        ],
+
+        iteration_text:[
+            'Я уже утомилась, давай прекратим ...',
         ],
         transitions:['block_main_transitions']
     },
@@ -146,6 +211,40 @@ const mom_blackDress = {
     },
 
     //===================================================
+
+    transitions_flirt:{
+        type:'transitions',
+
+        npc:Npc.mom,
+        npcStyle:NpcStyles.mom.blackDress,
+        npcImage:'react',
+
+        img_background:'',
+        change_states:[],
+
+        transitions:[
+
+            {text:'Заигрывать',address:'chatMomHi',
+                condition:[
+                    {option:'relations', npc:Npc.mom, type:'more',value:10},
+                    // {option:'relations', npc:Npc.mom, type:'less',value:11},
+                    {option:'dailyMark', npc:Npc.mom, type:'doesNotExist',value:dailyMarks.chatMomHi},
+                ]
+            },
+            {text:'Приставать',address:'chatMomNews',
+                condition:[
+                    {option:'relations', npc:Npc.mom, type:'more',value:4},
+                    {option:'relations', npc:Npc.mom, type:'less',value:16},
+                    {option:'dailyMark', npc:Npc.mom, type:'doesNotExist',value:dailyMarks.chatMomNews},
+                ]
+            },
+            {text:'(уйти)',address:'end', condition:[]},
+        ],
+    },
+
+    //===================================================
+
+
 
     presents:{
         type:'conversation',

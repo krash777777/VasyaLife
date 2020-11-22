@@ -1,11 +1,15 @@
+
+//Main
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { CSSTransitionGroup } from 'react-transition-group';
 
+//styles
 import './styles/fonts/DS-DIGI.TTF';
 
-import {changeGameStates_fromScene, changeClothes, findeSlot} from './modules/options.jsx';
 
+//modules
+import {changeGameStates_fromScene, changeClothes, findeSlot} from './modules/options.jsx';
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './modules/events.jsx';
 import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions, craft} from './modules/service.jsx';
 import {sleep, doInstanAction} from './modules/eventsInstanActions.jsx';
@@ -27,9 +31,10 @@ import './styles/videoActions.css';
 
 //teamplates
 import HomePage from './homePage.jsx';
+import AboutProject from './templates/tpl_aboutProject.jsx';
+import Save from './templates/tpl_save.jsx';
 import Scene from './templates/tpl_scene.jsx';
 import Location from './templates/tpl_location.jsx';
-import AboutProject from './templates/tpl_aboutProject.jsx';
 import Inventory from './templates/tpl_inventory.jsx';
 import Information from './templates/tpl_info.jsx';
 import Craft from './templates/tpl_craft.jsx';
@@ -59,8 +64,12 @@ class Game extends React.Component {
     }
 
     homePageMenuCommands(command){
+
         const gameStatus = JSON.parse(localStorage.getItem("VL"));
+        const thisState = this.state.General;
+
         if (command == 'newGame'){
+
             if (gameStatus){
                 let isNewGame = confirm("Существует уже сохраненная игра. Вы действительно хотите начать новую игру и удалить текущий прогресс?");
 
@@ -68,15 +77,34 @@ class Game extends React.Component {
                     localStorage.removeItem("VL");
                     this.performTransformations(defaultValues.GameDefaultStates);
                 }
+
             } else {
+
                 this.performTransformations(defaultValues.GameDefaultStates);
+
             };
         } if (command == 'continue'){
+
+            // localStorage.setItem("temporary storage",JSON.stringify(gameStatus));
+            // localStorage.removeItem("VL");
+
+            // localStorage.setItem("VL",JSON.stringify(options));
+            // this.setState(options);
+
+            //==
             this.performTransformations(gameStatus);
+            // localStorage.removeItem("temporary storage");
+
+        } if (command == 'save'){
+
+            thisState.tpl = templates.save;
+            this.setState({General:thisState});
+
         } if (command == 'aboutProject'){
-            const thisState = this.state.General;
+
             thisState.tpl = templates.aboutProject;
             this.setState({General:thisState});
+
         }
     }
 
@@ -285,8 +313,10 @@ class Game extends React.Component {
     }
 
     performTransformations(options){
+
         localStorage.setItem("VL",JSON.stringify(options));
         this.setState(options);
+
     }
 
     render() {
@@ -295,6 +325,10 @@ class Game extends React.Component {
 
         if (tpl == templates.homePage){
             return <HomePage homePageMenuCommands={(command) => this.homePageMenuCommands(command)} />;
+        } if (tpl === templates.aboutProject){
+            return <AboutProject />;
+        } if (tpl === templates.save){
+            return <Save data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.scene){
             return <Scene data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.location){
@@ -303,8 +337,6 @@ class Game extends React.Component {
             return <Action data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.instantAction){
              return <InstantAction data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
-        } if (tpl === templates.aboutProject){
-            return <AboutProject />;
         } if (tpl === templates.inventory){
             return <Inventory data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.information){

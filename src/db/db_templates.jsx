@@ -1,5 +1,7 @@
+
 const templates = {
     homePage:'homePage',
+    save:'save',
     aboutProject:'aboutProject',
     scene:'scene',
     location:'location',
@@ -12,7 +14,8 @@ const templates = {
     movingItems:'movingItems',
     action:'action',
     instantAction:'instantAction',
-    playerOptionsInfo:'playerOptionsInfo'
+    playerOptionsInfo:'playerOptionsInfo',
+
 }
 
 export default templates;

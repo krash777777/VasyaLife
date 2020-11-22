@@ -22,6 +22,7 @@ class HomePage extends React.Component {
                             <div className="main_menu">
                                 <a className="button txt-no-select" onClick={() => this.props.homePageMenuCommands('newGame')}>НОВАЯ ИГРА</a>
                                 <a className="button txt-no-select" onClick={() => this.props.homePageMenuCommands('continue')}>ПРОДОЛЖИТЬ</a>
+                                <a className="button txt-no-select" onClick={() => this.props.homePageMenuCommands('save')}>ЗАГРУЗИТЬ</a>
                                 <a className="button txt-no-select" onClick={() => this.props.homePageMenuCommands('aboutProject')}>О ПРОЕКТЕ</a>
                             </div>
                         </div>
