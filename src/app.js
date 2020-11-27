@@ -66,10 +66,26 @@ class Game extends React.Component {
     homePageMenuCommands(command){
 
         const gameStatus = JSON.parse(localStorage.getItem("VL"));
+        const gameSaves = JSON.parse(localStorage.getItem("VL_saveList"));
+
         const thisState = this.state.General;
 
         if (command == 'newGame'){
 
+            //если игра запускается впервые, сформируем массив сохранений
+            // if (!gameSaves){
+            //
+            //     var arrSaves = [];
+            //     var sStr = {date:'',time:'',data:''};
+            //
+            //     for(var i = 0; i < 9; i++) {
+            //         arrSaves[i] = sStr;
+            //     }
+            //
+            //     localStorage.setItem("VL_saveList",JSON.stringify(arrSaves));
+            // }
+
+            //если уже существует прогресс в игре, нужно спросить, будем ли играть заново
             if (gameStatus){
                 let isNewGame = confirm("Существует уже сохраненная игра. Вы действительно хотите начать новую игру и удалить текущий прогресс?");
 
@@ -85,15 +101,7 @@ class Game extends React.Component {
             };
         } if (command == 'continue'){
 
-            // localStorage.setItem("temporary storage",JSON.stringify(gameStatus));
-            // localStorage.removeItem("VL");
-
-            // localStorage.setItem("VL",JSON.stringify(options));
-            // this.setState(options);
-
-            //==
             this.performTransformations(gameStatus);
-            // localStorage.removeItem("temporary storage");
 
         } if (command == 'save'){
 
@@ -108,32 +116,60 @@ class Game extends React.Component {
         }
     }
 
-    // findeSlot(worldItemSorage, item){
-    //
-    //     //ищем слот, заполненный нашим предметом, если не находим, возвращаем пустой слот
-    //     if(worldItemSorage.slot1.length !== 0){
-    //         if(worldItemSorage.slot1[0].item.id == item.id){return {type:'increment',slot:'slot1'}}
-    //     }
-    //     if(worldItemSorage.slot2.length !== 0) {
-    //         if (worldItemSorage.slot2[0].item.id == item.id) {return {type:'increment',slot:'slot2'}}
-    //     }
-    //     if(worldItemSorage.slot3.length !== 0) {
-    //         if (worldItemSorage.slot3[0].item.id == item.id) {return {type:'increment',slot:'slot3'}}
-    //     }
-    //     if(worldItemSorage.slot4.length !== 0) {
-    //         if (worldItemSorage.slot4[0].item.id == item.id) {return {type:'increment',slot:'slot4'}}
-    //     }
-    //
-    //     //ищем пустой
-    //     if(worldItemSorage.slot1.length == 0){return {type:'add',slot:'slot1'}}
-    //     if(worldItemSorage.slot2.length == 0){return {type:'add',slot:'slot2'}}
-    //     if(worldItemSorage.slot3.length == 0){return {type:'add',slot:'slot3'}}
-    //     if(worldItemSorage.slot4.length == 0){return {type:'add',slot:'slot4'}}
-    //     else{
-    //         alert('Все слоты заняты!');
-    //         return -1; // в том случае, если все слоты заняты
-    //     }
-    // }
+    loadAndSave(command, options){
+        var gameStatus = JSON.parse(localStorage.getItem("VL"));
+        var gameSaves = JSON.parse(localStorage.getItem("VL_saveList"));
+
+        if (command == 'saveGame') {
+
+            if (!gameSaves){
+                gameSaves = [];
+
+                var sStr = {date:'',time:'',data:''};
+
+                for(var i = 0; i < 9; i++) {
+                    gameSaves[i] = sStr;
+                }
+            }
+
+            let date = new Date();
+            let currentDate = date.getFullYear()+':'+(date.getMonth()+1)+':'+date.getDate();
+            let currentTime = date.getHours()+':'+date.getMinutes()+':'+date.getSeconds();
+
+            if (gameSaves[options.currentIndex].data!==''){
+                let overwrite = confirm("Существует уже сохраненная игра в данной ячейке. Вы действительно хотите перезаписать?");
+
+                if (overwrite == true){
+                    gameSaves[options.currentIndex] = {date:currentDate,time:currentTime,data:gameStatus};
+                    localStorage.setItem("VL_saveList",JSON.stringify(gameSaves));
+                }
+            } else {
+                gameSaves[options.currentIndex] = {date:currentDate,time:currentTime,data:gameStatus};
+                localStorage.setItem("VL_saveList",JSON.stringify(gameSaves));
+            }
+
+            this.performTransformations(gameStatus);
+        }if (command == 'loadGame'){
+
+            if(gameSaves[options.currentIndex].data !== ''){
+
+                let loadQuestion = confirm("Текущий прогресс в игре будет потерян. Вы действительно хотите загрузить игру?");
+                if (loadQuestion == true){
+
+                    localStorage.removeItem("VL");
+
+                    gameSaves[options.currentIndex].data.General.tpl = templates.location;
+
+                    localStorage.setItem("VL",JSON.stringify(gameSaves[options.currentIndex].data));
+                    this.setState(gameSaves[options.currentIndex].data);
+
+                    // gameStatus.General.tpl = gameSaves[options.currentIndex].data.General.tpl;
+
+                    console.log(gameSaves[options.currentIndex].data);
+                }
+            }
+        }
+    }
 
     changeStates(command, options){
         var gameStatus = JSON.parse(localStorage.getItem("VL"));
@@ -340,7 +376,7 @@ class Game extends React.Component {
         } if (tpl === templates.inventory){
             return <Inventory data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.information){
-            return <Information data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
+            return <Information data={this.state} changeStates={(command, options) => this.changeStates(command, options)} loadAndSave={(command, options) => this.loadAndSave(command, options)}/>;
         } if (tpl === templates.craft){
             return <Craft data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.store){

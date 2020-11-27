@@ -75,6 +75,10 @@ const Images = {
         npc2:'content/ico/npc2.png',
         tasks:'content/ico/tasks.png',
         info:'content/ico/info.png',
+
+        save:'content/ico/save.png',
+        load:'content/ico/load.png',
+        foodRecipes:'content/ico/foodRecipes.png',
     },
     items:{
         food:{

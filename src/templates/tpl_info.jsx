@@ -24,6 +24,8 @@ class TabInformation extends React.Component {
         const npcVision = this.state.tabFocus=='npc'?'panelVisible':'panelInvisible';
         const infoVision = this.state.tabFocus=='info'?'panelVisible':'panelInvisible';
         const recipesVision = this.state.tabFocus=='recipes'?'panelVisible':'panelInvisible';
+        const saveVision = this.state.tabFocus=='save'?'panelVisible':'panelInvisible';
+        const loadVision = this.state.tabFocus=='load'?'panelVisible':'panelInvisible';
 
         const listQuests = data.GameMarks.quests.map((quest,index) =>
             <div key={index} className="questWrapper">
@@ -124,6 +126,50 @@ class TabInformation extends React.Component {
             </div>
         );
 
+        let gameSave = JSON.parse(localStorage.getItem("VL_saveList"));
+        //console.log(gameSave);
+
+        var arrSave = [];
+        if (!gameSave){
+            var sStr = {date:'',time:'',data:''};
+
+            for(var i = 0; i < 9; i++) {
+                arrSave[i] = sStr;
+            }
+        } else {
+            arrSave = gameSave;
+        }
+
+        let saveList = arrSave.map((arr, index)=>
+            <div
+                key={index}
+                className="seve_unit"
+                onClick={() => this.props.saveGame(index)}
+            >
+                <img src={arr.data == ''?Images.backgrounds.bubbles:arr.data.General.location.img} className="img_background backdround_layer"/>
+                <h3 className="text-save">{arr.date == ''?'<--->':arr.date}</h3>
+                <h4 className="text-save">{arr.time== ''?'<--->':arr.time}</h4>
+            </div>
+        );
+
+        var arrLoad = [];
+        if (gameSave){
+            arrLoad = gameSave
+        }
+
+        let loadList = arrSave.map((arr, index)=>
+            <div
+                key={index}
+                className="seve_unit"
+                onClick={() => this.props.loadGame(index)}
+            >
+                <img src={arr.data == ''?Images.backgrounds.bubbles:arr.data.General.location.img} className="img_background backdround_layer"/>
+                <h3 className="text-save">{arr.date == ''?'<--->':arr.date}</h3>
+                <h4 className="text-save">{arr.time== ''?'<--->':arr.time}</h4>
+            </div>
+        );
+
+
         return (
             <div>
                 <div className="infoBackground"></div>
@@ -147,11 +193,76 @@ class TabInformation extends React.Component {
                     <p className={infoVision+' tabHeader'}>Информация</p>
                 </div>
 
+                <div className={loadVision+' info'}>
+                    <p className={loadVision+' tabHeader'}>Загрузить</p>
+
+                    {loadList}
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                </div>
+
+                <div className={saveVision+' info'}>
+                    <p className={saveVision+' tabHeader'}>Сохранить</p>
+                    {saveList}
+                    {/*<div className="seve_unit" onClick={() => this.props.saveGame(0)}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+
+                    {/*<div className="seve_unit" onClick={() => this.props.saveGame(1)}>*/}
+                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
+                        {/*<h3 className="text-save">15.02.2020</h3>*/}
+                        {/*<h4 className="text-save">15:43</h4>*/}
+                    {/*</div>*/}
+                </div>
+
                 <div className="tablet-control-panel">
                     <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('quests')}><img src={Images.ico.tasks}/></div>
                     <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('npc')}><img src={Images.ico.npc2}/></div>
-                    <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('recipes')}><img src={Images.ico.orbGreen}/></div>
+                    <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('recipes')}><img src={Images.ico.foodRecipes}/></div>
                     <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('info')}><img src={Images.ico.info}/></div>
+                    <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('save')}><img src={Images.ico.save}/></div>
+                    <div className="tablet-control-panel-button" onClick={()=>this.changeTabFocus('load')}><img src={Images.ico.load}/></div>
                 </div>
             </div>
         )
@@ -162,6 +273,15 @@ class Information extends React.Component {
     constructor(props) {
         super(props);
     }
+
+    saveGame(currentIndex){
+        this.props.loadAndSave('saveGame', {currentIndex});
+    }
+
+    loadGame(currentIndex){
+        this.props.loadAndSave('loadGame', {currentIndex});
+    }
+
 
     render() {
         //console.log(this.props.data.GameMarks);
@@ -192,7 +312,7 @@ class Information extends React.Component {
 
                                 <div className="tablet-info-conteiner centered">
 
-                                    <TabInformation data={data}/>
+                                    <TabInformation data={data} saveGame={(currentIndex) => this.saveGame(currentIndex)} loadGame={(currentIndex) => this.loadGame(currentIndex)}/>
 
                                     <img src={Images.backgrounds.tabBackground}/>
 

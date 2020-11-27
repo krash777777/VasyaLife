@@ -97,7 +97,7 @@ img{
     width: 30%;
     /*border: blueviolet solid thin;*/
     float: left;
-    margin: 1.3vw 0 0 1.3vw;
+    margin: 1% 0 0 2%;
     border-radius: 1vw;
     box-shadow: 1px 1px 2px 1px darkgrey;
 }
@@ -115,7 +115,7 @@ img{
 .text-save{
     position: relative;
     z-index: 2;
-    top: -10vw;
+    top: -50%;
     margin: 0 1vw;
     font-size: 1vw;
 }
