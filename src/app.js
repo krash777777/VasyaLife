@@ -9,7 +9,7 @@ import './styles/fonts/DS-DIGI.TTF';
 
 
 //modules
-import {changeGameStates_fromScene, changeClothes, findeSlot} from './modules/options.jsx';
+import {changeGameStates_fromScene, changeClothes, findeSlot, refreshDB} from './modules/options.jsx';
 import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './modules/events.jsx';
 import {findeValueOnTheArray, findeRecepie, getNpcRelations, checkConditions, craft} from './modules/service.jsx';
 import {sleep, doInstanAction} from './modules/eventsInstanActions.jsx';
@@ -64,27 +64,10 @@ class Game extends React.Component {
     }
 
     homePageMenuCommands(command){
-
         const gameStatus = JSON.parse(localStorage.getItem("VL"));
-        const gameSaves = JSON.parse(localStorage.getItem("VL_saveList"));
-
         const thisState = this.state.General;
 
         if (command == 'newGame'){
-
-            //если игра запускается впервые, сформируем массив сохранений
-            // if (!gameSaves){
-            //
-            //     var arrSaves = [];
-            //     var sStr = {date:'',time:'',data:''};
-            //
-            //     for(var i = 0; i < 9; i++) {
-            //         arrSaves[i] = sStr;
-            //     }
-            //
-            //     localStorage.setItem("VL_saveList",JSON.stringify(arrSaves));
-            // }
-
             //если уже существует прогресс в игре, нужно спросить, будем ли играть заново
             if (gameStatus){
                 let isNewGame = confirm("Существует уже сохраненная игра. Вы действительно хотите начать новую игру и удалить текущий прогресс?");
@@ -203,27 +186,7 @@ class Game extends React.Component {
 
         }if (command == 'launchInstantAction'){
 
-            //если включить код, это запустит интерыейс мгновенных действий.....сейчас принял решение что будем работать через события
-            //gameStatus.General.tpl = templates.instantAction;
-
-            //console.log(options);
-
             gameStatus = doInstanAction(options, gameStatus);
-
-            // if (options.act.id == 'sleep') {
-            //     //gameStatus = sleep(options, gameStatus);
-            //
-            //     gameStatus.General.tpl = templates.scene;
-            //     gameStatus.General.action = scenes.sleep;
-            //
-            // } if (options.act.id == 'test'){
-            //
-            //     gameStatus.General.tpl = templates.instantAction;
-            //     gameStatus.General.action = options.act;
-            //
-            // } else {
-            //     alert('функции для мгновенного события <<'+options.act.id+'>> не создано!!!');
-            // }
 
         }if (command == 'instantActionisOver'){
 
@@ -238,6 +201,8 @@ class Game extends React.Component {
         }if (command == 'theEnd'){
 
             //логическое завершение игры - пока не сделал
+
+            //
 
         }if (command == 'useItem'){
 
@@ -349,6 +314,9 @@ class Game extends React.Component {
     }
 
     performTransformations(options){
+        console.log(options);
+
+        options = refreshDB(options);
 
         localStorage.setItem("VL",JSON.stringify(options));
         this.setState(options);

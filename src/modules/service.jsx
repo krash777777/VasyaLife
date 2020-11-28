@@ -58,7 +58,6 @@ function checkConditions(conditions, gameStatus) {
             if (conditions[i].type == 'less'){if (npcRelations.relations < conditions[i].value){conditionCount++}}
             if (conditions[i].type == 'equally'){if (npcRelations.relations = conditions[i].value){conditionCount++}}
 
-            // console.log(npcRelations.relations+' - '+conditions[i].type+' - '+conditions[i].value);
         }
 
         if (conditions[i].option == 'corruption'){
@@ -110,8 +109,6 @@ function checkConditions(conditions, gameStatus) {
                 if (markId == -1){conditionCount++}
             }
         }
-
-        // console.log(conditions[i].option + ' - '+conditionCount);
     }
 
 
@@ -195,12 +192,7 @@ function checkRecepie(recepie, craftStore){
 }
 
 function findeRecepie(gameStatus, locationCraft) {
-
     const worldItemSorage = gameStatus.WorldSettings.worldItemStorage[locationCraft];
-
-    //console.log(recepies);
-    // console.log(Object.keys(recepies).length);
-    // console.log(Object.keys(recepies)[0]);
 
     let recepieObject = Object.keys(recepies); //преобразовали в неассациативный массив
 
@@ -245,8 +237,6 @@ function craft(options, gameStatus){
                 playerStorage[playerStorage.length] = {item:recepie[a].item,quantity:recepie[a].quantity};
             }
         }
-
-
     }
 
     return gameStatus;

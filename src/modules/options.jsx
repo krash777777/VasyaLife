@@ -1,9 +1,10 @@
 import {findeValueOnTheArray} from './service.jsx';
+import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './events.jsx';
+
 import playerOptions from '../db/db_playerOptions.jsx';
 import scenes from '../db/db_scenesGeneral.jsx';
 import templates from '../db/db_templates.jsx';
 import locations from '../db/db_locations.jsx';
-import {goToLocation, relax, scene, useItem, purchaseGoods, purchaseClothing, removeItem, receiveItem} from './events.jsx';
 import items from '../db/db_items.jsx';
 import clothingSets from '../db/db_clothingSets.jsx';
 
@@ -585,4 +586,11 @@ function getSkyOpasity(hour){
     if (hour>22){return 0.8}
 }
 
-export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes, findeSlot, getSkyOpasity};
+function refreshDB(gameStatus){
+
+    //тут нужно сделать обновление базы данных
+
+    return gameStatus;
+}
+
+export {changeTimeData, parseTimeData, changeOption, changeTime, changeGameStates_fromScene, addModifier, deleteModifier, addRecipeOnTheList, changeClothes, findeSlot, getSkyOpasity, refreshDB};
