@@ -332,7 +332,7 @@ class Game extends React.Component {
         } if (tpl === templates.aboutProject){
             return <AboutProject />;
         } if (tpl === templates.save){
-            return <Save data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
+            return <Save data={this.state} changeStates={(command, options) => this.changeStates(command, options)} loadAndSave={(command, options) => this.loadAndSave(command, options)}/>;
         } if (tpl === templates.scene){
             return <Scene data={this.state} changeStates={(command, options) => this.changeStates(command, options)}/>;
         } if (tpl === templates.location){

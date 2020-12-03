@@ -67,20 +67,6 @@ class TabInformation extends React.Component {
                     </div>
                 </div>
 
-
-                {/*<p>*/}
-                    {/*<span className="npcName">{stringNpc.npc.name}</span>*/}
-                    {/*<span className="npcChar">Отношения: <span className="npcInfoDiscriptionValue">{stringNpc.relations}</span></span>*/}
-                    {/*<span className="npcChar">Похоть: <span className="npcInfoDiscriptionValue">{stringNpc.corruption}</span></span>*/}
-                {/*</p>*/}
-
-                {/*<div className="npcIco">*/}
-                    {/*<img src={stringNpc.npc.ico}/>*/}
-                {/*</div>*/}
-                {/*<div className="npcInfo">*/}
-                    {/*<p className="npcName">{stringNpc.npc.name}</p>*/}
-                    {/*<p className="npcDiscription">{stringNpc.npc.discription}</p>*/}
-                {/*</div>*/}
             </div>
         );
 
@@ -108,20 +94,6 @@ class TabInformation extends React.Component {
                         </div>
                     )}
                 </div>
-
-                {/*<div className="recipeItemShell recipeItemDiscription-width">*/}
-                    {/*<p>Наименование комплекта</p>*/}
-                    {/*<p className="recipeItemDiscription">{arrRecipes.recipe.discription}</p>*/}
-                {/*</div>*/}
-
-                {/*<div className="recipeItemShell effects-width">*/}
-                    {/*<p>Эффекты</p>*/}
-                    {/*<div className="component">*/}
-                        {/*<div className="componen-img"><img src={Images.items.food.apple}/></div>*/}
-                        {/*<div className={'increase' =='increase'?'component-value-plus':'component-value-minus'}>{'increase' == 'increase'?'+':'-'}{1}</div>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
-
 
             </div>
         );
@@ -152,11 +124,6 @@ class TabInformation extends React.Component {
             </div>
         );
 
-        var arrLoad = [];
-        if (gameSave){
-            arrLoad = gameSave
-        }
-
         let loadList = arrSave.map((arr, index)=>
             <div
                 key={index}
@@ -164,8 +131,8 @@ class TabInformation extends React.Component {
                 onClick={() => this.props.loadGame(index)}
             >
                 <img src={arr.data == ''?Images.backgrounds.bubbles:arr.data.General.location.img} className="img_background backdround_layer"/>
-                <h3 className="text-save">{arr.date == ''?'<--->':arr.date}</h3>
-                <h4 className="text-save">{arr.time== ''?'<--->':arr.time}</h4>
+                <h3 className="text-save">{arr.date == ''?'>---<':arr.date}</h3>
+                <h4 className="text-save">{arr.time== ''?'>---<':arr.time}</h4>
             </div>
         );
 
@@ -197,63 +164,11 @@ class TabInformation extends React.Component {
                     <p className={loadVision+' tabHeader'}>Загрузить</p>
 
                     {loadList}
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-                    {/*<div className="seve_unit" onClick={() => alert('1')}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
                 </div>
 
                 <div className={saveVision+' info'}>
                     <p className={saveVision+' tabHeader'}>Сохранить</p>
                     {saveList}
-                    {/*<div className="seve_unit" onClick={() => this.props.saveGame(0)}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
-
-                    {/*<div className="seve_unit" onClick={() => this.props.saveGame(1)}>*/}
-                        {/*<img src={Images.backgrounds.death} className="img_background backdround_layer"/>*/}
-                        {/*<h3 className="text-save">15.02.2020</h3>*/}
-                        {/*<h4 className="text-save">15:43</h4>*/}
-                    {/*</div>*/}
                 </div>
 
                 <div className="tablet-control-panel">

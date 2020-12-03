@@ -92,6 +92,10 @@ img{
     margin: 1vw;
 }
 
+.cellSaveOpacity{
+    opacity: 0.6;
+}
+
 .seve_unit{
     height: 26%;
     width: 30%;
